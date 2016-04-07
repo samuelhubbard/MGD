@@ -1,10 +1,7 @@
-//
-//  GameViewController.swift
-//  MGD_1604
-//
-//  Created by Samuel Hubbard on 4/5/16.
-//  Copyright (c) 2016 Samuel Hubbard. All rights reserved.
-//
+// Samuel Hubbard
+// MGD - 1604
+// Game Project (Game currently has no name)
+// Current Version: Proof
 
 import UIKit
 import SpriteKit
