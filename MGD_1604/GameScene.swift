@@ -17,6 +17,7 @@
 */
 
 import SpriteKit
+import AVFoundation
 
 class GameScene: SKScene {
     
@@ -28,10 +29,45 @@ class GameScene: SKScene {
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
         
+        // preload the sound effects
+        do {
+            // instantiate the arrays that will hold all of the game's sound effects
+            let wavs = ["mech"]
+            let mp3s = ["alien"]
+            
+            // run a for loop that will preload all of the sound effects for wav files
+            for wav in wavs {
+                let wavPlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(wav, ofType: "wav")!))
+                wavPlayer.prepareToPlay()
+            }
+            
+            // run a for loop that will preload all of the sound effects for mp3 files
+            for mp3 in mp3s {
+                let mp3Player = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(mp3, ofType: "mp3")!))
+                mp3Player.prepareToPlay()
+            }
+        } catch {
+            
+        }
+        
         // link the variables to the sprite notes in the scene
         enemyTypeOne = self.childNodeWithName("enemyOne") as! SKSpriteNode
         enemyTypeTwo = self.childNodeWithName("enemyTwo") as! SKSpriteNode
         playerMech = self.childNodeWithName("mech") as! SKSpriteNode
+        
+        let enemyOnePatrolOne = SKAction.moveByX(-1805.0, y: 0.0, duration: 4.0)
+        enemyOnePatrolOne.timingMode = .EaseInEaseOut
+        let enemyOnePatrolTwo = SKAction.moveByX(1805.0, y: 0.0, duration: 4.0)
+        enemyOnePatrolTwo.timingMode = .EaseInEaseOut
+        let enemyOneSequence = SKAction.sequence([enemyOnePatrolOne, enemyOnePatrolTwo])
+        enemyTypeOne.runAction(SKAction.repeatActionForever(enemyOneSequence))
+        
+        let enemyTwoPatrolOne = SKAction.moveByX(1805.0, y: 0.0, duration: 5.0)
+        enemyTwoPatrolOne.timingMode = .EaseInEaseOut
+        let enemyTwoPatrolTwo = SKAction.moveByX(-1805.0, y: 0.0, duration: 5.0)
+        enemyTwoPatrolTwo.timingMode = .EaseInEaseOut
+        let enemyTwoSequence = SKAction.sequence([enemyTwoPatrolOne, enemyTwoPatrolTwo])
+        enemyTypeTwo.runAction(SKAction.repeatActionForever(enemyTwoSequence))
  
     }
     
