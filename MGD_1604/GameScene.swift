@@ -15,6 +15,7 @@
  Background Image: cptx032
  Ship Explosion Sound: Luke.RUSTLTD
  Missed Explosion Sound: NenadSimic
+ Projectile Fired Sound: bart
  
 */
 
