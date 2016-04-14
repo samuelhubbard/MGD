@@ -51,6 +51,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             
             // run a for loop that will preload all of the sound effects for mp3 files
+            // even though there is only one, there may be another mp3 added later in development, so... FUTURECASTING!
             for mp3 in mp3s {
                 let mp3Player = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(mp3, ofType: "mp3")!))
                 mp3Player.prepareToPlay()
@@ -100,31 +101,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
        /* Called when a touch begins */
         
-        // set a constant to the projectile sprite located in a different scene
-        let projectile:SKSpriteNode = SKScene(fileNamed: "Projectile")!.childNodeWithName("projectile")! as! SKSpriteNode
-        
-        // play the sound for firing a projectile
-        self.runAction(SKAction.playSoundFileNamed("ProjectileFired.wav", waitForCompletion: true))
-        
-        // remove the projectile from it's current parent and add it to this scene
-        projectile.removeFromParent()
-        self.addChild(projectile)
-        
-        // set the projectile's position and z on screen
-        projectile.position = playerMech.position
-        projectile.zPosition = 1
-        
-        // shoot the projectile out
-        projectile.physicsBody?.applyImpulse(CGVectorMake(90.0, 190.0))
-        
-        // set the collision bit mask and contact test bit mask for the projectile
-        projectile.physicsBody?.collisionBitMask = barrierMask | enemyMask
-        projectile.physicsBody?.contactTestBitMask = projectile.physicsBody!.collisionBitMask
-
-    }
-    
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        
         // run a for loop for the touch
         for touch:AnyObject! in touches {
             // get the location of the touch
@@ -143,9 +119,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 self.runAction(SKAction.playSoundFileNamed("alien.mp3", waitForCompletion: true))
             } else if spriteName == "mech" {
                 self.runAction(SKAction.playSoundFileNamed("mech.wav", waitForCompletion: true))
+            // if none of sprites listed above were touched, fire a projectile!
+            } else {
+                
+                // set a constant to the projectile sprite located in a different scene
+                let projectile:SKSpriteNode = SKScene(fileNamed: "Projectile")!.childNodeWithName("projectile")! as! SKSpriteNode
+                
+                // play the sound for firing a projectile
+                self.runAction(SKAction.playSoundFileNamed("ProjectileFired.wav", waitForCompletion: true))
+                
+                // remove the projectile from it's current parent and add it to this scene
+                projectile.removeFromParent()
+                self.addChild(projectile)
+                
+                // set the projectile's position and z on screen
+                projectile.position = playerMech.position
+                projectile.zPosition = 1
+                
+                // shoot the projectile out
+                projectile.physicsBody?.applyImpulse(CGVectorMake(90.0, 190.0))
+                
+                // set the collision bit mask and contact test bit mask for the projectile
+                projectile.physicsBody?.collisionBitMask = barrierMask | enemyMask
+                projectile.physicsBody?.contactTestBitMask = projectile.physicsBody!.collisionBitMask
             }
         }
-        
     }
    
     override func update(currentTime: CFTimeInterval) {
