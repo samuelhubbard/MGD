@@ -1,7 +1,7 @@
 // Samuel Hubbard
 // MGD - 1604
-// Game Project (Game currently has no name)
-// Current Version: Alpha
+// Final Hope
+// Current Version: Beta
 
 import UIKit
 import SpriteKit
@@ -21,8 +21,14 @@ class GameViewController: UIViewController {
             skView.ignoresSiblingOrder = true
             
             /* Set the scale mode to scale to fit the window */
-            scene.scaleMode = .AspectFill
+            scene.scaleMode = .Fill
             
+            // preloading the texture atlas
+            var atlasArray = [SKTextureAtlas]()
+            atlasArray.append(SKTextureAtlas(named: "Explosion"))
+            SKTextureAtlas.preloadTextureAtlases(atlasArray) {}
+            
+            // show the scene
             skView.presentScene(scene)
         }
     }

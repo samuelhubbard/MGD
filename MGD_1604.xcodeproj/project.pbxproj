@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		86048F001CC80FCE00D5E7D5 /* EndGame.wav in Resources */ = {isa = PBXBuildFile; fileRef = 86048EFF1CC80FCE00D5E7D5 /* EndGame.wav */; };
+		86048F021CC8115900D5E7D5 /* EndConditions.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 86048F011CC8115900D5E7D5 /* EndConditions.mp3 */; };
 		86309D8D1CBF0A8000DCDF5D /* Projectile.sks in Resources */ = {isa = PBXBuildFile; fileRef = 86309D8C1CBF0A8000DCDF5D /* Projectile.sks */; };
 		865569551CB6182D00944709 /* alien.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 865569541CB6182D00944709 /* alien.mp3 */; };
 		865569571CB6185C00944709 /* mech.wav in Resources */ = {isa = PBXBuildFile; fileRef = 865569561CB6185C00944709 /* mech.wav */; };
+		8684CBD61CC7194D00963526 /* Explosion.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8684CBD51CC7194D00963526 /* Explosion.atlas */; };
 		86C3F29A1CB4B84500167F06 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C3F2991CB4B84500167F06 /* AppDelegate.swift */; };
 		86C3F29C1CB4B84500167F06 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 86C3F29B1CB4B84500167F06 /* GameScene.sks */; };
 		86C3F29E1CB4B84500167F06 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C3F29D1CB4B84500167F06 /* GameScene.swift */; };
@@ -45,9 +48,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		86048EFF1CC80FCE00D5E7D5 /* EndGame.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = EndGame.wav; sourceTree = "<group>"; };
+		86048F011CC8115900D5E7D5 /* EndConditions.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = EndConditions.mp3; sourceTree = "<group>"; };
 		86309D8C1CBF0A8000DCDF5D /* Projectile.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Projectile.sks; sourceTree = "<group>"; };
 		865569541CB6182D00944709 /* alien.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alien.mp3; sourceTree = "<group>"; };
 		865569561CB6185C00944709 /* mech.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = mech.wav; sourceTree = "<group>"; };
+		8684CBD51CC7194D00963526 /* Explosion.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Explosion.atlas; sourceTree = "<group>"; };
 		86C3F2961CB4B84500167F06 /* MGD_1604.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MGD_1604.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86C3F2991CB4B84500167F06 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		86C3F29B1CB4B84500167F06 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -99,6 +105,8 @@
 		865569581CB6186700944709 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				86048F011CC8115900D5E7D5 /* EndConditions.mp3 */,
+				86048EFF1CC80FCE00D5E7D5 /* EndGame.wav */,
 				86F2D62A1CBF533D00C875EB /* EnemyExplosionSound.wav */,
 				86F2D62C1CBF53CB00C875EB /* MissExplosion.wav */,
 				86F2D62F1CBF5A1C00C875EB /* ProjectileFired.wav */,
@@ -106,6 +114,24 @@
 				865569561CB6185C00944709 /* mech.wav */,
 			);
 			name = Sounds;
+			sourceTree = "<group>";
+		};
+		8684CBD31CC5BC7300963526 /* ExplosionParticleEffects */ = {
+			isa = PBXGroup;
+			children = (
+				86F2D6241CBF4EC200C875EB /* EnemyExplosion.sks */,
+				86F2D6281CBF4F6900C875EB /* ProjectileExplosion.sks */,
+				86F2D6251CBF4EC200C875EB /* spark.png */,
+			);
+			name = ExplosionParticleEffects;
+			sourceTree = "<group>";
+		};
+		8684CBD41CC7193100963526 /* EndExplosionAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				8684CBD51CC7194D00963526 /* Explosion.atlas */,
+			);
+			name = EndExplosionAnimation;
 			sourceTree = "<group>";
 		};
 		86C3F28D1CB4B84500167F06 = {
@@ -131,14 +157,13 @@
 		86C3F2981CB4B84500167F06 /* MGD_1604 */ = {
 			isa = PBXGroup;
 			children = (
+				8684CBD41CC7193100963526 /* EndExplosionAnimation */,
 				86C3F2991CB4B84500167F06 /* AppDelegate.swift */,
 				86C3F29F1CB4B84500167F06 /* GameViewController.swift */,
 				86C3F29D1CB4B84500167F06 /* GameScene.swift */,
 				86C3F29B1CB4B84500167F06 /* GameScene.sks */,
 				86309D8C1CBF0A8000DCDF5D /* Projectile.sks */,
-				86F2D6241CBF4EC200C875EB /* EnemyExplosion.sks */,
-				86F2D6281CBF4F6900C875EB /* ProjectileExplosion.sks */,
-				86F2D6251CBF4EC200C875EB /* spark.png */,
+				8684CBD31CC5BC7300963526 /* ExplosionParticleEffects */,
 				86C3F2A11CB4B84500167F06 /* Main.storyboard */,
 				86C3F2A41CB4B84500167F06 /* Assets.xcassets */,
 				86C3F2A61CB4B84500167F06 /* LaunchScreen.storyboard */,
@@ -275,10 +300,13 @@
 				86F2D6271CBF4EC200C875EB /* spark.png in Resources */,
 				86F2D62D1CBF53CB00C875EB /* MissExplosion.wav in Resources */,
 				86F2D62B1CBF533D00C875EB /* EnemyExplosionSound.wav in Resources */,
+				8684CBD61CC7194D00963526 /* Explosion.atlas in Resources */,
 				86C3F29C1CB4B84500167F06 /* GameScene.sks in Resources */,
 				865569571CB6185C00944709 /* mech.wav in Resources */,
 				86F2D6291CBF4F6900C875EB /* ProjectileExplosion.sks in Resources */,
+				86048F001CC80FCE00D5E7D5 /* EndGame.wav in Resources */,
 				86C3F2A81CB4B84500167F06 /* LaunchScreen.storyboard in Resources */,
+				86048F021CC8115900D5E7D5 /* EndConditions.mp3 in Resources */,
 				86C3F2A51CB4B84500167F06 /* Assets.xcassets in Resources */,
 				86C3F2A31CB4B84500167F06 /* Main.storyboard in Resources */,
 				865569551CB6182D00944709 /* alien.mp3 in Resources */,
@@ -455,6 +483,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.samhubbard.apple.MGD-1604";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -466,6 +495,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.samhubbard.apple.MGD-1604";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

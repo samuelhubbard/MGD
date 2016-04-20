@@ -1,7 +1,7 @@
 // Samuel Hubbard
 // MGD - 1604
-// Game Project (Game currently has no name)
-// Current Version: Alpha
+// Final Hope
+// Current Version: Beta
 
 import UIKit
 
