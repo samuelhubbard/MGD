@@ -33,15 +33,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let enemyMask:UInt32 = 0x1 << 2
     
     // define the sprite nodes from the scene that require manipulation
-    var enemyTypeOne:SKSpriteNode!
-    var enemyTypeTwo:SKSpriteNode!
-    var enemyTypeThree:SKSpriteNode!
-    var playerMech:SKSpriteNode!
-    var pauseButton:SKSpriteNode!
-    var fireButton:SKSpriteNode!
-    var roundContainer:SKSpriteNode!
-    var roundCounter:SKLabelNode!
-    var explosion:SKSpriteNode!
+    var enemyTypeOne:SKSpriteNode = SKSpriteNode()
+    var enemyTypeTwo:SKSpriteNode = SKSpriteNode()
+    var enemyTypeThree:SKSpriteNode = SKSpriteNode()
+    var playerMech:SKSpriteNode = SKSpriteNode()
+    var pauseButton:SKSpriteNode = SKSpriteNode()
+    var fireButton:SKSpriteNode = SKSpriteNode()
+    var roundContainer:SKSpriteNode = SKSpriteNode()
+    var roundCounter:SKLabelNode = SKLabelNode()
+    var explosion:SKSpriteNode = SKSpriteNode()
     var explosionTextureAtlas = SKTextureAtlas()
     var explosionTextureArray = [SKTexture]()
     var winConditionsLabel = SKLabelNode()
@@ -52,7 +52,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // game conditions
     var gameComplete:Bool = false
-    var enemiesArray:[String]!
+    var enemiesArray:[String] = []
     var projectilesInAir:Int = 0
     var totalNumberOfProjectiles = 5
     var wonGame:Bool = false
@@ -96,8 +96,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         roundContainer = self.childNodeWithName("roundContainer") as! SKSpriteNode
         roundCounter = roundContainer.childNodeWithName("totalRounds") as! SKLabelNode
         
-        // instantiating the array that will hold the names of all of the enemy sprites
-        enemiesArray = []
+        
         
         // looping through all of the sprite nodes in the scene and populating the array with enemy sprite names
         for child in self.children {
@@ -220,7 +219,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     totalNumberOfProjectiles -= 1
                     projectilesInAir += 1
                     
-                    // TODO: Update GUI
+                    // set the updated amount of rounds on the UI
                     roundCounter.text = String(totalNumberOfProjectiles)
                     
                     // set a constant to the projectile sprite located in a different scene
@@ -385,6 +384,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             // setting up for the label, define the waiting time and code block to show the text
             let moreWaiting = SKAction.waitForDuration(1)
+            let endWaiting = SKAction.waitForDuration(3)
             let showEndCondition = SKAction.runBlock({
                 self.explosion.removeFromParent()
                 
@@ -402,7 +402,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 let playSound = SKAction.runBlock({ 
                     self.runAction(SKAction.playSoundFileNamed("EndConditions.mp3", waitForCompletion: true))
                 })
-                self.runAction(SKAction.sequence([soundWaiting, playSound]))
+                
+                let moveToMainMenu = SKAction.runBlock({
+                    let mainMenu = MainMenuScene(fileNamed: "MainMenuScene")!
+                    
+                    mainMenu.scaleMode = .Fill
+                    let transitionToScene:SKTransition = SKTransition.crossFadeWithDuration(2.0)
+                    
+                    self.view?.presentScene(mainMenu, transition: transitionToScene)
+                })
+                self.runAction(SKAction.sequence([soundWaiting, playSound, endWaiting, moveToMainMenu]))
+                
+                
             })
             
             // run the action sequence for the end of game conditions text
