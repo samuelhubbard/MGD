@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "86C3F2951CB4B84500167F06"
-               BuildableName = "MGD_1604.app"
-               BlueprintName = "MGD_1604"
-               ReferencedContainer = "container:MGD_1604.xcodeproj">
+               BuildableName = "Final Hope.app"
+               BlueprintName = "Final Hope"
+               ReferencedContainer = "container:Final Hope.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "86C3F2AD1CB4B84500167F06"
-               BuildableName = "MGD_1604Tests.xctest"
-               BlueprintName = "MGD_1604Tests"
-               ReferencedContainer = "container:MGD_1604.xcodeproj">
+               BuildableName = "Final Hope.xctest"
+               BlueprintName = "Final HopeTests"
+               ReferencedContainer = "container:Final Hope.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "86C3F2B81CB4B84500167F06"
-               BuildableName = "MGD_1604UITests.xctest"
-               BlueprintName = "MGD_1604UITests"
-               ReferencedContainer = "container:MGD_1604.xcodeproj">
+               BuildableName = "Final Hope.xctest"
+               BlueprintName = "Final HopeUITests"
+               ReferencedContainer = "container:Final Hope.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -53,9 +53,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "86C3F2951CB4B84500167F06"
-            BuildableName = "MGD_1604.app"
-            BlueprintName = "MGD_1604"
-            ReferencedContainer = "container:MGD_1604.xcodeproj">
+            BuildableName = "Final Hope.app"
+            BlueprintName = "Final Hope"
+            ReferencedContainer = "container:Final Hope.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "86C3F2951CB4B84500167F06"
-            BuildableName = "MGD_1604.app"
-            BlueprintName = "MGD_1604"
-            ReferencedContainer = "container:MGD_1604.xcodeproj">
+            BuildableName = "Final Hope.app"
+            BlueprintName = "Final Hope"
+            ReferencedContainer = "container:Final Hope.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -95,9 +95,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "86C3F2951CB4B84500167F06"
-            BuildableName = "MGD_1604.app"
-            BlueprintName = "MGD_1604"
-            ReferencedContainer = "container:MGD_1604.xcodeproj">
+            BuildableName = "Final Hope.app"
+            BlueprintName = "Final Hope"
+            ReferencedContainer = "container:Final Hope.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

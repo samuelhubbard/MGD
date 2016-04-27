@@ -1,7 +1,7 @@
 // Samuel Hubbard
 // MGD - 1604
 // Final Hope
-// Current Version: Beta
+// Current Version: Gold
 
 /*
  
@@ -23,7 +23,6 @@
 */
 
 import SpriteKit
-import AVFoundation
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
@@ -42,9 +41,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var roundContainer:SKSpriteNode = SKSpriteNode()
     var roundCounter:SKLabelNode = SKLabelNode()
     var explosion:SKSpriteNode = SKSpriteNode()
-    var explosionTextureAtlas = SKTextureAtlas()
-    var explosionTextureArray = [SKTexture]()
-    var winConditionsLabel = SKLabelNode()
+    var explosionTextureAtlas:SKTextureAtlas = SKTextureAtlas()
+    var explosionTextureArray:[SKTexture] = [SKTexture]()
+    var winConditionsLabel:SKLabelNode = SKLabelNode()
     
     
     // boolean that tells whether to pause or unpause the scene.
@@ -59,30 +58,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
-        
-        // preload the sound effects
-        // this WILL be moved to a different scene later in development.
-        do {
-            // instantiate the arrays that will hold all of the game's sound effects
-            let wavs = ["mech", "EnemyExplosionSound", "MissExplosion", "ProjectileFired", "EndGame"]
-            let mp3s = ["alien", "EndConditions"]
-            
-            // run a for loop that will preload all of the sound effects for wav files
-            for wav in wavs {
-                let wavPlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(wav, ofType: "wav")!))
-                wavPlayer.prepareToPlay()
-            }
-            
-            // run a for loop that will preload all of the sound effects for mp3 files
-            // even though there is only one, there may be another mp3 added later in development, so... FUTURECASTING!
-            for mp3 in mp3s {
-                let mp3Player = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(mp3, ofType: "mp3")!))
-                mp3Player.prepareToPlay()
-            }
-        } catch {
-            
-        }
-        
+                
         // setting the contactDelegate (for collisions) to self
         self.physicsWorld.contactDelegate = self
         
@@ -95,7 +71,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         fireButton = self.childNodeWithName("fireButton") as! SKSpriteNode
         roundContainer = self.childNodeWithName("roundContainer") as! SKSpriteNode
         roundCounter = roundContainer.childNodeWithName("totalRounds") as! SKLabelNode
-        
         
         
         // looping through all of the sprite nodes in the scene and populating the array with enemy sprite names
@@ -201,12 +176,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             // if the pause button was hit
             } else if spriteName == "pauseButton" {
                 // if the game is not currently paused
-                if gamePaused == false {
+                if gamePaused == false && wonGame == false {
                     // pause it and set the boolean to indicate the game is now paused
                     scene!.view!.paused = true
                     gamePaused = true
                 // if the game is currently paused
-                } else if gamePaused == true {
+                } else if gamePaused == true && wonGame == false {
                     // "unpause" it and set the boolean to indicate the game is now "unpaused"
                     scene!.view!.paused = false
                     gamePaused = false

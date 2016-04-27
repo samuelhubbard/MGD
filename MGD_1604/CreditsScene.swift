@@ -1,12 +1,13 @@
 // Samuel Hubbard
 // MGD - 1604
 // Final Hope
-// Current Version: Beta
+// Current Version: Gold
 
 import SpriteKit
 
 class CreditsScene: SKScene {
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        // upon touch, load back into the main menu
         let mainMenu = MainMenuScene(fileNamed: "MainMenuScene")!
         
         mainMenu.scaleMode = .Fill

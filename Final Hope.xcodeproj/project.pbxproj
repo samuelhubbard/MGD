@@ -66,7 +66,7 @@
 		865569541CB6182D00944709 /* alien.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alien.mp3; sourceTree = "<group>"; };
 		865569561CB6185C00944709 /* mech.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = mech.wav; sourceTree = "<group>"; };
 		8684CBD51CC7194D00963526 /* Explosion.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Explosion.atlas; sourceTree = "<group>"; };
-		86C3F2961CB4B84500167F06 /* MGD_1604.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MGD_1604.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		86C3F2961CB4B84500167F06 /* Final Hope.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Final Hope.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		86C3F2991CB4B84500167F06 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		86C3F29B1CB4B84500167F06 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		86C3F29D1CB4B84500167F06 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -75,10 +75,10 @@
 		86C3F2A41CB4B84500167F06 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		86C3F2A71CB4B84500167F06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		86C3F2A91CB4B84500167F06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		86C3F2AE1CB4B84500167F06 /* MGD_1604Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MGD_1604Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		86C3F2AE1CB4B84500167F06 /* Final Hope.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Final Hope.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		86C3F2B21CB4B84500167F06 /* MGD_1604Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MGD_1604Tests.swift; sourceTree = "<group>"; };
 		86C3F2B41CB4B84500167F06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		86C3F2B91CB4B84500167F06 /* MGD_1604UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MGD_1604UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		86C3F2B91CB4B84500167F06 /* Final Hope.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Final Hope.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		86C3F2BD1CB4B84500167F06 /* MGD_1604UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MGD_1604UITests.swift; sourceTree = "<group>"; };
 		86C3F2BF1CB4B84500167F06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86F2D6241CBF4EC200C875EB /* EnemyExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = EnemyExplosion.sks; sourceTree = "<group>"; };
@@ -159,9 +159,9 @@
 		86C3F2971CB4B84500167F06 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				86C3F2961CB4B84500167F06 /* MGD_1604.app */,
-				86C3F2AE1CB4B84500167F06 /* MGD_1604Tests.xctest */,
-				86C3F2B91CB4B84500167F06 /* MGD_1604UITests.xctest */,
+				86C3F2961CB4B84500167F06 /* Final Hope.app */,
+				86C3F2AE1CB4B84500167F06 /* Final Hope.xctest */,
+				86C3F2B91CB4B84500167F06 /* Final Hope.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -212,9 +212,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		86C3F2951CB4B84500167F06 /* MGD_1604 */ = {
+		86C3F2951CB4B84500167F06 /* Final Hope */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 86C3F2C21CB4B84500167F06 /* Build configuration list for PBXNativeTarget "MGD_1604" */;
+			buildConfigurationList = 86C3F2C21CB4B84500167F06 /* Build configuration list for PBXNativeTarget "Final Hope" */;
 			buildPhases = (
 				86C3F2921CB4B84500167F06 /* Sources */,
 				86C3F2931CB4B84500167F06 /* Frameworks */,
@@ -224,14 +224,14 @@
 			);
 			dependencies = (
 			);
-			name = MGD_1604;
+			name = "Final Hope";
 			productName = MGD_1604;
-			productReference = 86C3F2961CB4B84500167F06 /* MGD_1604.app */;
+			productReference = 86C3F2961CB4B84500167F06 /* Final Hope.app */;
 			productType = "com.apple.product-type.application";
 		};
-		86C3F2AD1CB4B84500167F06 /* MGD_1604Tests */ = {
+		86C3F2AD1CB4B84500167F06 /* Final HopeTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 86C3F2C51CB4B84500167F06 /* Build configuration list for PBXNativeTarget "MGD_1604Tests" */;
+			buildConfigurationList = 86C3F2C51CB4B84500167F06 /* Build configuration list for PBXNativeTarget "Final HopeTests" */;
 			buildPhases = (
 				86C3F2AA1CB4B84500167F06 /* Sources */,
 				86C3F2AB1CB4B84500167F06 /* Frameworks */,
@@ -242,14 +242,14 @@
 			dependencies = (
 				86C3F2B01CB4B84500167F06 /* PBXTargetDependency */,
 			);
-			name = MGD_1604Tests;
+			name = "Final HopeTests";
 			productName = MGD_1604Tests;
-			productReference = 86C3F2AE1CB4B84500167F06 /* MGD_1604Tests.xctest */;
+			productReference = 86C3F2AE1CB4B84500167F06 /* Final Hope.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		86C3F2B81CB4B84500167F06 /* MGD_1604UITests */ = {
+		86C3F2B81CB4B84500167F06 /* Final HopeUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 86C3F2C81CB4B84500167F06 /* Build configuration list for PBXNativeTarget "MGD_1604UITests" */;
+			buildConfigurationList = 86C3F2C81CB4B84500167F06 /* Build configuration list for PBXNativeTarget "Final HopeUITests" */;
 			buildPhases = (
 				86C3F2B51CB4B84500167F06 /* Sources */,
 				86C3F2B61CB4B84500167F06 /* Frameworks */,
@@ -260,9 +260,9 @@
 			dependencies = (
 				86C3F2BB1CB4B84500167F06 /* PBXTargetDependency */,
 			);
-			name = MGD_1604UITests;
+			name = "Final HopeUITests";
 			productName = MGD_1604UITests;
-			productReference = 86C3F2B91CB4B84500167F06 /* MGD_1604UITests.xctest */;
+			productReference = 86C3F2B91CB4B84500167F06 /* Final Hope.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -288,7 +288,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 86C3F2911CB4B84500167F06 /* Build configuration list for PBXProject "MGD_1604" */;
+			buildConfigurationList = 86C3F2911CB4B84500167F06 /* Build configuration list for PBXProject "Final Hope" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -301,9 +301,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				86C3F2951CB4B84500167F06 /* MGD_1604 */,
-				86C3F2AD1CB4B84500167F06 /* MGD_1604Tests */,
-				86C3F2B81CB4B84500167F06 /* MGD_1604UITests */,
+				86C3F2951CB4B84500167F06 /* Final Hope */,
+				86C3F2AD1CB4B84500167F06 /* Final HopeTests */,
+				86C3F2B81CB4B84500167F06 /* Final HopeUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -386,12 +386,12 @@
 /* Begin PBXTargetDependency section */
 		86C3F2B01CB4B84500167F06 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 86C3F2951CB4B84500167F06 /* MGD_1604 */;
+			target = 86C3F2951CB4B84500167F06 /* Final Hope */;
 			targetProxy = 86C3F2AF1CB4B84500167F06 /* PBXContainerItemProxy */;
 		};
 		86C3F2BB1CB4B84500167F06 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 86C3F2951CB4B84500167F06 /* MGD_1604 */;
+			target = 86C3F2951CB4B84500167F06 /* Final Hope */;
 			targetProxy = 86C3F2BA1CB4B84500167F06 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -506,7 +506,7 @@
 				INFOPLIST_FILE = MGD_1604/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.samhubbard.apple.MGD-1604";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Final Hope";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -518,7 +518,7 @@
 				INFOPLIST_FILE = MGD_1604/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.samhubbard.apple.MGD-1604";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Final Hope";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -531,8 +531,8 @@
 				INFOPLIST_FILE = MGD_1604Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.samhubbard.apple.MGD-1604Tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MGD_1604.app/MGD_1604";
+				PRODUCT_NAME = "Final Hope";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Final Hope.app/Final Hope";
 			};
 			name = Debug;
 		};
@@ -543,8 +543,8 @@
 				INFOPLIST_FILE = MGD_1604Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.samhubbard.apple.MGD-1604Tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MGD_1604.app/MGD_1604";
+				PRODUCT_NAME = "Final Hope";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Final Hope.app/Final Hope";
 			};
 			name = Release;
 		};
@@ -555,7 +555,7 @@
 				INFOPLIST_FILE = MGD_1604UITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.samhubbard.apple.MGD-1604UITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Final Hope";
 				TEST_TARGET_NAME = MGD_1604;
 			};
 			name = Debug;
@@ -566,7 +566,7 @@
 				INFOPLIST_FILE = MGD_1604UITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.samhubbard.apple.MGD-1604UITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Final Hope";
 				TEST_TARGET_NAME = MGD_1604;
 			};
 			name = Release;
@@ -574,7 +574,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		86C3F2911CB4B84500167F06 /* Build configuration list for PBXProject "MGD_1604" */ = {
+		86C3F2911CB4B84500167F06 /* Build configuration list for PBXProject "Final Hope" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				86C3F2C01CB4B84500167F06 /* Debug */,
@@ -583,7 +583,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		86C3F2C21CB4B84500167F06 /* Build configuration list for PBXNativeTarget "MGD_1604" */ = {
+		86C3F2C21CB4B84500167F06 /* Build configuration list for PBXNativeTarget "Final Hope" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				86C3F2C31CB4B84500167F06 /* Debug */,
@@ -592,7 +592,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		86C3F2C51CB4B84500167F06 /* Build configuration list for PBXNativeTarget "MGD_1604Tests" */ = {
+		86C3F2C51CB4B84500167F06 /* Build configuration list for PBXNativeTarget "Final HopeTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				86C3F2C61CB4B84500167F06 /* Debug */,
@@ -601,7 +601,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		86C3F2C81CB4B84500167F06 /* Build configuration list for PBXNativeTarget "MGD_1604UITests" */ = {
+		86C3F2C81CB4B84500167F06 /* Build configuration list for PBXNativeTarget "Final HopeUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				86C3F2C91CB4B84500167F06 /* Debug */,
