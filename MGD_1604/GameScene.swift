@@ -1,5 +1,5 @@
 // Samuel Hubbard
-// MGD - 1604
+// MGD - 1604 & IAD - 1605
 // Final Hope
 // Current Version: Gold
 
@@ -40,6 +40,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var fireButton:SKSpriteNode = SKSpriteNode()
     var roundContainer:SKSpriteNode = SKSpriteNode()
     var roundCounter:SKLabelNode = SKLabelNode()
+    var timeContainer:SKSpriteNode = SKSpriteNode()
+    var matchTimer:SKLabelNode = SKLabelNode()
     var explosion:SKSpriteNode = SKSpriteNode()
     var explosionTextureAtlas:SKTextureAtlas = SKTextureAtlas()
     var explosionTextureArray:[SKTexture] = [SKTexture]()
@@ -54,7 +56,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var enemiesArray:[String] = []
     var projectilesInAir:Int = 0
     var totalNumberOfProjectiles = 5
+    var totalTimeRemaining = 20
     var wonGame:Bool = false
+    let remainingRoundMultiplier:Int = 20
+    let remainingTimeMultiplier:Int = 3
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
@@ -71,6 +76,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         fireButton = self.childNodeWithName("fireButton") as! SKSpriteNode
         roundContainer = self.childNodeWithName("roundContainer") as! SKSpriteNode
         roundCounter = roundContainer.childNodeWithName("totalRounds") as! SKLabelNode
+        timeContainer = self.childNodeWithName("timeContainer") as! SKSpriteNode
+        matchTimer = timeContainer.childNodeWithName("timeRemaining") as! SKLabelNode
         
         
         // looping through all of the sprite nodes in the scene and populating the array with enemy sprite names
@@ -83,6 +90,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // setting how many rounds the user to fire on the screen
         roundCounter.text = String(totalNumberOfProjectiles)
+        
+        // set the total number of seconds left for the player to finish the round
+        matchTimer.text = String(totalTimeRemaining)
         
         // linking to the texture atlas
         explosionTextureAtlas = SKTextureAtlas(named: "Explosion")
@@ -143,6 +153,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // create the sequence for enemy 3's patrol animation, assign it to the sprite and run forever
         let enemyThreeSequence = SKAction.sequence([enemyThreePatrolOne, enemyThreePatrolTwo])
         enemyTypeThree.runAction(SKAction.repeatActionForever(enemyThreeSequence), withKey: "e3KeyAnimation")
+        
+        // start running the timer
+        runTimer()
+
+    }
+    
+    func runTimer() {
+        // if there is still time remaining
+        if totalTimeRemaining > 0 {
+            // if the game is not complete
+            if !gameComplete {
+                // set the wait for one second
+                let timeDecrease = SKAction.waitForDuration(1)
+                // add a run block in to handle the decrease by one
+                let moveTimeDown = SKAction.runBlock({
+                    // decrease the amount of time left by one
+                    self.totalTimeRemaining -= 1
+                    // display the new time remaining
+                    self.matchTimer.text = String(self.totalTimeRemaining)
+                    // rerun the function
+                    self.runTimer()
+                })
+                
+                // run the action sequence with the wait and decrease
+                self.runAction(SKAction.sequence([timeDecrease, moveTimeDown]))
+            }
+        }
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -218,6 +255,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     projectile.physicsBody?.collisionBitMask = barrierMask | enemyMask
                     projectile.physicsBody?.contactTestBitMask = projectile.physicsBody!.collisionBitMask
                 }
+            } else if spriteName == "restartLevel" {
+                let restartGame = GameScene(fileNamed: "GameScene")
+                
+                restartGame!.scaleMode = .Fill
+                let transitionToScene:SKTransition = SKTransition.crossFadeWithDuration(2.0)
+                
+                self.view?.presentScene(restartGame!, transition: transitionToScene)
+            } else if spriteName == "backToMenu" {
+                let mainMenu = MainMenuScene(fileNamed: "MainMenuScene")
+                
+                mainMenu!.scaleMode = .Fill
+                let transitionToScene:SKTransition = SKTransition.crossFadeWithDuration(2.0)
+                
+                self.view?.presentScene(mainMenu!, transition: transitionToScene)
             }
         }
     }
@@ -235,6 +286,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             // just incase of an error
             else if !enemiesArray.isEmpty && totalNumberOfProjectiles == 0 && projectilesInAir == 0 {
+                wonGame = false
+                self.animateExplosion()
+                gameComplete = true
+            }
+            
+            else if !enemiesArray.isEmpty && totalTimeRemaining == 0 {
                 wonGame = false
                 self.animateExplosion()
                 gameComplete = true
@@ -378,15 +435,94 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     self.runAction(SKAction.playSoundFileNamed("EndConditions.mp3", waitForCompletion: true))
                 })
                 
-                let moveToMainMenu = SKAction.runBlock({
-                    let mainMenu = MainMenuScene(fileNamed: "MainMenuScene")!
+                let moveToScoreBox = SKAction.runBlock({
+                    // removing the win/lose statement node
+                    let winFadeOut = SKAction.fadeAlphaTo(0, duration: 0.001)
+                    self.winConditionsLabel.runAction(winFadeOut)
+                    self.winConditionsLabel.removeFromParent()
                     
-                    mainMenu.scaleMode = .Fill
-                    let transitionToScene:SKTransition = SKTransition.crossFadeWithDuration(2.0)
+                    // if the player won the game
+                    if self.wonGame {
+                        // set a constant to the projectile sprite located in a different scene
+                        let scoreBox:SKSpriteNode = SKScene(fileNamed: "ScoreScene")!.childNodeWithName("scoreBox")! as! SKSpriteNode
+                        
+                        scoreBox.alpha = 0
                     
-                    self.view?.presentScene(mainMenu, transition: transitionToScene)
+                        // remove the projectile from it's current parent and add it to this scene
+                        scoreBox.removeFromParent()
+                        self.addChild(scoreBox)
+                    
+                        // set the score box's position and z on screen
+                        scoreBox.position = CGPointMake(self.frame.width / 2, self.frame.height / 2)
+                        scoreBox.zPosition = 4
+                    
+                        // pull all of the applicable children from the score box
+                        var scoreFromRounds:SKLabelNode = SKLabelNode()
+                        var scoreFromTime:SKLabelNode = SKLabelNode()
+                        var scoreTotal:SKLabelNode = SKLabelNode()
+                        var starOne:SKSpriteNode = SKSpriteNode()
+                        var starTwo:SKSpriteNode = SKSpriteNode()
+                        var starThree:SKSpriteNode = SKSpriteNode()
+                        scoreFromRounds = scoreBox.childNodeWithName("roundsScore") as! SKLabelNode
+                        scoreFromTime = scoreBox.childNodeWithName("timeScore") as! SKLabelNode
+                        scoreTotal = scoreBox.childNodeWithName("totalScore") as! SKLabelNode
+                        starOne = scoreBox.childNodeWithName("star1") as! SKSpriteNode
+                        starTwo = scoreBox.childNodeWithName("star2") as! SKSpriteNode
+                        starThree = scoreBox.childNodeWithName("star3") as! SKSpriteNode
+                        
+                        starOne.alpha = 0
+                        starTwo.alpha = 0
+                        starThree.alpha = 0
+                        
+                        // running the calculations for the score
+                        let calculatedRoundsScore:Int = self.totalNumberOfProjectiles * self.remainingRoundMultiplier
+                        let calculatedTimeScore:Int = self.totalTimeRemaining * self.remainingTimeMultiplier
+                    
+                        // Displaying the score
+                        scoreFromRounds.text = String(calculatedRoundsScore)
+                        scoreFromTime.text = String(calculatedTimeScore)
+                        
+                        let calculatedTotalScore:Int = calculatedTimeScore + calculatedRoundsScore
+                        
+                        scoreTotal.text = String(calculatedTotalScore)
+                        
+                        if calculatedTotalScore >= 75 {
+                            starOne.alpha = 1
+                            starTwo.alpha = 1
+                            starThree.alpha = 1
+                        } else if calculatedTotalScore <= 74 && calculatedTotalScore >= 50 {
+                            starOne.alpha = 1
+                            starTwo.alpha = 1
+                            starThree.alpha = 0
+                        } else if calculatedTotalScore <= 49 && calculatedTotalScore >= 30 {
+                            starOne.alpha = 1
+                            starTwo.alpha = 0
+                            starThree.alpha = 0
+                        } else if calculatedTotalScore <= 29 {
+                            starOne.alpha = 0
+                            starTwo.alpha = 0
+                            starThree.alpha = 0
+                        }
+                        
+                        let fadeScoreIn = SKAction.fadeAlphaTo(1, duration: 0.5)
+                        scoreBox.runAction(fadeScoreIn)
+                    // if the player lost the game
+                    } else {
+                        // go back to the main menu
+                        
+                        // define what scene to transition to
+                        let mainMenu = MainMenuScene(fileNamed: "MainMenuScene")
+                        
+                        // set the scale mode and transition
+                        mainMenu!.scaleMode = .Fill
+                        let transitionToScene:SKTransition = SKTransition.crossFadeWithDuration(2.0)
+                        
+                        // perform the transition
+                        self.view?.presentScene(mainMenu!, transition: transitionToScene)
+                    }
+                    
                 })
-                self.runAction(SKAction.sequence([soundWaiting, playSound, endWaiting, moveToMainMenu]))
+                self.runAction(SKAction.sequence([soundWaiting, playSound, endWaiting, moveToScoreBox]))
                 
                 
             })
