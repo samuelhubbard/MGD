@@ -60,6 +60,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var wonGame:Bool = false
     let remainingRoundMultiplier:Int = 20
     let remainingTimeMultiplier:Int = 3
+    var totalStarsAwarded:Int = 0 // futurecasting
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
@@ -482,28 +483,40 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         scoreFromRounds.text = String(calculatedRoundsScore)
                         scoreFromTime.text = String(calculatedTimeScore)
                         
+                        // getting the total score for the game
                         let calculatedTotalScore:Int = calculatedTimeScore + calculatedRoundsScore
                         
+                        // populating the total score for the game
                         scoreTotal.text = String(calculatedTotalScore)
                         
+                        // conditional statement that handles how many stars were awarded
                         if calculatedTotalScore >= 75 {
                             starOne.alpha = 1
                             starTwo.alpha = 1
                             starThree.alpha = 1
+                            
+                            self.totalStarsAwarded = 3
                         } else if calculatedTotalScore <= 74 && calculatedTotalScore >= 50 {
                             starOne.alpha = 1
                             starTwo.alpha = 1
                             starThree.alpha = 0
+                            
+                            self.totalStarsAwarded = 2
                         } else if calculatedTotalScore <= 49 && calculatedTotalScore >= 30 {
                             starOne.alpha = 1
                             starTwo.alpha = 0
                             starThree.alpha = 0
+                            
+                            self.totalStarsAwarded = 1
                         } else if calculatedTotalScore <= 29 {
                             starOne.alpha = 0
                             starTwo.alpha = 0
                             starThree.alpha = 0
+                            
+                            self.totalStarsAwarded = 0
                         }
                         
+                        // define the fade in action and run it to show the score box
                         let fadeScoreIn = SKAction.fadeAlphaTo(1, duration: 0.5)
                         scoreBox.runAction(fadeScoreIn)
                     // if the player lost the game
