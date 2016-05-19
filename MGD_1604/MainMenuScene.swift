@@ -10,6 +10,7 @@ class MainMenuScene: SKScene {
     var startButton:SKLabelNode = SKLabelNode()
     var instructionsButton:SKLabelNode = SKLabelNode()
     var creditsButton:SKLabelNode = SKLabelNode()
+    var leaderboardButton:SKLabelNode = SKLabelNode()
     
     let apiKey = "0f3f60f530c7a19aaea37ec9d09283c2f3908fe541aa26f946d839141432a80d"
     let secretKey = "14487c8ed6ffd81b863c957150217752b85ad0e81d7321d658d471b880fbd472"
@@ -19,29 +20,7 @@ class MainMenuScene: SKScene {
         startButton = self.childNodeWithName("startButton") as! SKLabelNode
         instructionsButton = self.childNodeWithName("instructionsButton") as! SKLabelNode
         creditsButton = self.childNodeWithName("creditsButton") as! SKLabelNode
-        
-        // test
-//        let userName = "Sam"
-//        let pwd = "YesYes"
-//        let emailId = "hsamuel82@gmail.com"
-//        App42API.initializeWithAPIKey(apiKey, andSecretKey:secretKey)
-//        let userService = App42API.buildUserService() as? UserService
-//        userService?.createUser(userName, password: pwd, emailAddress:emailId, completionBlock: { (success, response, exception) -> Void in
-//            if(success)
-//            {
-//                let user = response as! User
-//                print(user.userName)
-//                print(user.email)
-//                print(user.sessionId)
-//            }
-//            else
-//            {
-//                print(exception.reason!)
-//                print(exception.appErrorCode)
-//                print(exception.httpErrorCode)
-//                print(exception.userInfo!)
-//            }
-//        })
+        leaderboardButton = self.childNodeWithName("leaderboardButton") as! SKLabelNode
 
     }
 
@@ -88,6 +67,16 @@ class MainMenuScene: SKScene {
                 
                 // perform the transition
                 self.view?.presentScene(creditsScene, transition: transitionToScene)
+            } else if spriteName == "leaderboardButton" {
+                // set the scene that will be transitioned into
+                let leaderboardScene:LeaderboardScene = LeaderboardScene(fileNamed: "LeaderboardScene")!
+                
+                // add the required definitions (scaleMode and the transition animation)
+                leaderboardScene.scaleMode = .Fill
+                let transitionToScene:SKTransition = SKTransition.crossFadeWithDuration(1.0)
+                
+                // perform the transition
+                self.view?.presentScene(leaderboardScene, transition: transitionToScene)
             }
         }
     }
