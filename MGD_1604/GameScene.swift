@@ -62,6 +62,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let remainingTimeMultiplier:Int = 3
     var totalStarsAwarded:Int = 0 // futurecasting
     
+    let apiKey = "0f3f60f530c7a19aaea37ec9d09283c2f3908fe541aa26f946d839141432a80d"
+    let secretKey = "14487c8ed6ffd81b863c957150217752b85ad0e81d7321d658d471b880fbd472"
+    
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
                 
@@ -515,6 +518,60 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                             
                             self.totalStarsAwarded = 0
                         }
+                        
+                        // adding a score to the leaderboard
+                        
+                        // start by logging in the user
+                        let userName = "Sam"
+                        let pwd = "sam";
+                        App42API.initializeWithAPIKey(self.apiKey, andSecretKey:self.secretKey)
+                        let userService = App42API.buildUserService() as? UserService
+                        userService?.authenticateUser(userName, password:pwd, completionBlock: { (success, response, exception) -> Void in
+                            if(success)
+                            {
+                                let user = response as! User
+                                print(user.userName)
+                                print(user.email)
+                                print(user.sessionId)
+                                
+                                // this is where the score will be added
+                                
+                                let gameName = "LevelOne"
+                                let userName = user.userName
+                                let gameScore:Double = Double(calculatedTotalScore)
+                                App42API.initializeWithAPIKey(self.apiKey, andSecretKey: self.secretKey)
+                                let scoreBoardService = App42API.buildScoreBoardService() as? ScoreBoardService
+                                scoreBoardService?.saveUserScore(gameName, gameUserName:userName, gameScore:gameScore, completionBlock: { (success, response, exception) -> Void in
+                                    if(success)
+                                    {
+                                        let game = response as! Game
+                                        print(game.name)
+                                        let scoreList = game.scoreList
+                                        for score in scoreList
+                                        {
+                                            print(score.userName)
+                                            let scoreValue = score.value as Double
+                                            print(scoreValue)
+                                            print(score.scoreId)
+                                        }  
+                                    }  
+                                    else  
+                                    {  
+                                        print(exception.reason!)
+                                        print(exception.appErrorCode)
+                                        print(exception.httpErrorCode)
+                                        print(exception.userInfo!)
+                                    }  
+                                })
+                            }  
+                            else  
+                            {  
+                                print(exception.reason!)
+                                print(exception.appErrorCode)
+                                print(exception.httpErrorCode)
+                                print(exception.userInfo!)
+                            }  
+                        })
                         
                         // define the fade in action and run it to show the score box
                         let fadeScoreIn = SKAction.fadeAlphaTo(1, duration: 0.5)

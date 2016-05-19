@@ -11,11 +11,38 @@ class MainMenuScene: SKScene {
     var instructionsButton:SKLabelNode = SKLabelNode()
     var creditsButton:SKLabelNode = SKLabelNode()
     
+    let apiKey = "0f3f60f530c7a19aaea37ec9d09283c2f3908fe541aa26f946d839141432a80d"
+    let secretKey = "14487c8ed6ffd81b863c957150217752b85ad0e81d7321d658d471b880fbd472"
+    
     override func didMoveToView(view: SKView) {
         // link the sprite nodes to the storyboard
         startButton = self.childNodeWithName("startButton") as! SKLabelNode
         instructionsButton = self.childNodeWithName("instructionsButton") as! SKLabelNode
         creditsButton = self.childNodeWithName("creditsButton") as! SKLabelNode
+        
+        // test
+//        let userName = "Sam"
+//        let pwd = "YesYes"
+//        let emailId = "hsamuel82@gmail.com"
+//        App42API.initializeWithAPIKey(apiKey, andSecretKey:secretKey)
+//        let userService = App42API.buildUserService() as? UserService
+//        userService?.createUser(userName, password: pwd, emailAddress:emailId, completionBlock: { (success, response, exception) -> Void in
+//            if(success)
+//            {
+//                let user = response as! User
+//                print(user.userName)
+//                print(user.email)
+//                print(user.sessionId)
+//            }
+//            else
+//            {
+//                print(exception.reason!)
+//                print(exception.appErrorCode)
+//                print(exception.httpErrorCode)
+//                print(exception.userInfo!)
+//            }
+//        })
+
     }
 
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {

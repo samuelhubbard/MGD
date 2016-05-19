@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		86048F001CC80FCE00D5E7D5 /* EndGame.wav in Resources */ = {isa = PBXBuildFile; fileRef = 86048EFF1CC80FCE00D5E7D5 /* EndGame.wav */; };
 		86048F021CC8115900D5E7D5 /* EndConditions.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 86048F011CC8115900D5E7D5 /* EndConditions.mp3 */; };
+		86085A3C1CEAB2D300B8CA5B /* Shephertz_App42_iOS_API.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86085A3B1CEAB2D300B8CA5B /* Shephertz_App42_iOS_API.framework */; };
+		86085A3D1CEAB2D300B8CA5B /* Shephertz_App42_iOS_API.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86085A3B1CEAB2D300B8CA5B /* Shephertz_App42_iOS_API.framework */; };
+		86085A3E1CEAB2D300B8CA5B /* Shephertz_App42_iOS_API.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86085A3B1CEAB2D300B8CA5B /* Shephertz_App42_iOS_API.framework */; };
 		86309D8D1CBF0A8000DCDF5D /* Projectile.sks in Resources */ = {isa = PBXBuildFile; fileRef = 86309D8C1CBF0A8000DCDF5D /* Projectile.sks */; };
 		863B7F831CCEF53C00A2ACFB /* MainMenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 863B7F821CCEF53C00A2ACFB /* MainMenuScene.sks */; };
 		863B7F851CCEF57000A2ACFB /* MainMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863B7F841CCEF57000A2ACFB /* MainMenuScene.swift */; };
@@ -20,6 +23,9 @@
 		865569571CB6185C00944709 /* mech.wav in Resources */ = {isa = PBXBuildFile; fileRef = 865569561CB6185C00944709 /* mech.wav */; };
 		8684CBD61CC7194D00963526 /* Explosion.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8684CBD51CC7194D00963526 /* Explosion.atlas */; };
 		86C08C8A1CE2366800314A54 /* ScoreScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 86C08C891CE2366800314A54 /* ScoreScene.sks */; };
+		86C3CC071CEAA8380025F93B /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86C3CC061CEAA8380025F93B /* CoreTelephony.framework */; };
+		86C3CC091CEAA8470025F93B /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86C3CC081CEAA8470025F93B /* CoreFoundation.framework */; };
+		86C3CC0B1CEAA85D0025F93B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86C3CC0A1CEAA85D0025F93B /* SystemConfiguration.framework */; };
 		86C3F29A1CB4B84500167F06 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C3F2991CB4B84500167F06 /* AppDelegate.swift */; };
 		86C3F29C1CB4B84500167F06 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 86C3F29B1CB4B84500167F06 /* GameScene.sks */; };
 		86C3F29E1CB4B84500167F06 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C3F29D1CB4B84500167F06 /* GameScene.swift */; };
@@ -57,6 +63,8 @@
 /* Begin PBXFileReference section */
 		86048EFF1CC80FCE00D5E7D5 /* EndGame.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = EndGame.wav; sourceTree = "<group>"; };
 		86048F011CC8115900D5E7D5 /* EndConditions.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = EndConditions.mp3; sourceTree = "<group>"; };
+		86085A351CEAB19100B8CA5B /* Final Hope-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Final Hope-Bridging-Header.h"; sourceTree = "<group>"; };
+		86085A3B1CEAB2D300B8CA5B /* Shephertz_App42_iOS_API.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Shephertz_App42_iOS_API.framework; sourceTree = "<group>"; };
 		86309D8C1CBF0A8000DCDF5D /* Projectile.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Projectile.sks; sourceTree = "<group>"; };
 		863B7F821CCEF53C00A2ACFB /* MainMenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainMenuScene.sks; sourceTree = "<group>"; };
 		863B7F841CCEF57000A2ACFB /* MainMenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuScene.swift; sourceTree = "<group>"; };
@@ -68,6 +76,9 @@
 		865569561CB6185C00944709 /* mech.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = mech.wav; sourceTree = "<group>"; };
 		8684CBD51CC7194D00963526 /* Explosion.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Explosion.atlas; sourceTree = "<group>"; };
 		86C08C891CE2366800314A54 /* ScoreScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ScoreScene.sks; sourceTree = "<group>"; };
+		86C3CC061CEAA8380025F93B /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		86C3CC081CEAA8470025F93B /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		86C3CC0A1CEAA85D0025F93B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		86C3F2961CB4B84500167F06 /* Final Hope.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Final Hope.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		86C3F2991CB4B84500167F06 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		86C3F29B1CB4B84500167F06 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -96,6 +107,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86C3CC0B1CEAA85D0025F93B /* SystemConfiguration.framework in Frameworks */,
+				86085A3C1CEAB2D300B8CA5B /* Shephertz_App42_iOS_API.framework in Frameworks */,
+				86C3CC091CEAA8470025F93B /* CoreFoundation.framework in Frameworks */,
+				86C3CC071CEAA8380025F93B /* CoreTelephony.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +118,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86085A3D1CEAB2D300B8CA5B /* Shephertz_App42_iOS_API.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,12 +126,39 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86085A3E1CEAB2D300B8CA5B /* Shephertz_App42_iOS_API.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		86085A3F1CED4AE700B8CA5B /* Swift Files */ = {
+			isa = PBXGroup;
+			children = (
+				863B7F8C1CCF04E000A2ACFB /* CreditsScene.swift */,
+				863B7F881CCF02DD00A2ACFB /* InstructionsScene.swift */,
+				86C3F29D1CB4B84500167F06 /* GameScene.swift */,
+				863B7F841CCEF57000A2ACFB /* MainMenuScene.swift */,
+				86C3F29F1CB4B84500167F06 /* GameViewController.swift */,
+				86C3F2991CB4B84500167F06 /* AppDelegate.swift */,
+			);
+			name = "Swift Files";
+			sourceTree = "<group>";
+		};
+		86085A401CED4B0900B8CA5B /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				863B7F821CCEF53C00A2ACFB /* MainMenuScene.sks */,
+				86C3F29B1CB4B84500167F06 /* GameScene.sks */,
+				86C08C891CE2366800314A54 /* ScoreScene.sks */,
+				863B7F861CCF02B400A2ACFB /* InstructionsScene.sks */,
+				863B7F8A1CCF04CE00A2ACFB /* CreditsScene.sks */,
+				86309D8C1CBF0A8000DCDF5D /* Projectile.sks */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
 		865569581CB6186700944709 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -148,10 +191,22 @@
 			name = EndExplosionAnimation;
 			sourceTree = "<group>";
 		};
+		86C3CC0C1CEAA86C0025F93B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				86085A3B1CEAB2D300B8CA5B /* Shephertz_App42_iOS_API.framework */,
+				86C3CC061CEAA8380025F93B /* CoreTelephony.framework */,
+				86C3CC081CEAA8470025F93B /* CoreFoundation.framework */,
+				86C3CC0A1CEAA85D0025F93B /* SystemConfiguration.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		86C3F28D1CB4B84500167F06 = {
 			isa = PBXGroup;
 			children = (
 				86C3F2981CB4B84500167F06 /* MGD_1604 */,
+				86C3CC0C1CEAA86C0025F93B /* Frameworks */,
 				86C3F2B11CB4B84500167F06 /* MGD_1604Tests */,
 				86C3F2BC1CB4B84500167F06 /* MGD_1604UITests */,
 				86C3F2971CB4B84500167F06 /* Products */,
@@ -171,25 +226,16 @@
 		86C3F2981CB4B84500167F06 /* MGD_1604 */ = {
 			isa = PBXGroup;
 			children = (
+				86085A401CED4B0900B8CA5B /* Scenes */,
+				86085A3F1CED4AE700B8CA5B /* Swift Files */,
 				8684CBD41CC7193100963526 /* EndExplosionAnimation */,
 				8684CBD31CC5BC7300963526 /* ExplosionParticleEffects */,
 				865569581CB6186700944709 /* Sounds */,
-				86C3F2991CB4B84500167F06 /* AppDelegate.swift */,
-				86C3F29F1CB4B84500167F06 /* GameViewController.swift */,
-				863B7F841CCEF57000A2ACFB /* MainMenuScene.swift */,
-				863B7F821CCEF53C00A2ACFB /* MainMenuScene.sks */,
-				86C3F29D1CB4B84500167F06 /* GameScene.swift */,
-				86C3F29B1CB4B84500167F06 /* GameScene.sks */,
-				86C08C891CE2366800314A54 /* ScoreScene.sks */,
-				863B7F881CCF02DD00A2ACFB /* InstructionsScene.swift */,
-				863B7F861CCF02B400A2ACFB /* InstructionsScene.sks */,
-				863B7F8C1CCF04E000A2ACFB /* CreditsScene.swift */,
-				863B7F8A1CCF04CE00A2ACFB /* CreditsScene.sks */,
-				86309D8C1CBF0A8000DCDF5D /* Projectile.sks */,
 				86C3F2A11CB4B84500167F06 /* Main.storyboard */,
 				86C3F2A41CB4B84500167F06 /* Assets.xcassets */,
 				86C3F2A61CB4B84500167F06 /* LaunchScreen.storyboard */,
 				86C3F2A91CB4B84500167F06 /* Info.plist */,
+				86085A351CEAB19100B8CA5B /* Final Hope-Bridging-Header.h */,
 			);
 			path = MGD_1604;
 			sourceTree = "<group>";
@@ -507,10 +553,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = MGD_1604/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.samhubbard.apple.MGD-1604";
 				PRODUCT_NAME = "Final Hope";
+				SWIFT_OBJC_BRIDGING_HEADER = "MGD_1604/Final Hope-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -519,10 +572,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = MGD_1604/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.samhubbard.apple.MGD-1604";
 				PRODUCT_NAME = "Final Hope";
+				SWIFT_OBJC_BRIDGING_HEADER = "MGD_1604/Final Hope-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -532,6 +591,10 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = MGD_1604Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.samhubbard.apple.MGD-1604Tests";
@@ -544,6 +607,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = MGD_1604Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.samhubbard.apple.MGD-1604Tests";
@@ -556,6 +623,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = MGD_1604UITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.samhubbard.apple.MGD-1604UITests";
@@ -567,6 +638,10 @@
 		86C3F2CA1CB4B84500167F06 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = MGD_1604UITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.samhubbard.apple.MGD-1604UITests";
