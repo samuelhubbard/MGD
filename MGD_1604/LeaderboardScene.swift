@@ -4,6 +4,8 @@
 // Current Version: Gold
 
 import SpriteKit
+import FBSDKCoreKit
+import FBSDKShareKit
 
 class LeaderboardScene:SKScene {
     // clickable elements from the sks file
@@ -62,7 +64,12 @@ class LeaderboardScene:SKScene {
     var scoreFiveStarTwo:SKSpriteNode = SKSpriteNode()
     var scoreFiveStarThree:SKSpriteNode = SKSpriteNode()
     
+    let shareButton: FBSDKShareButton = FBSDKShareButton()
+    var topScore:Score!
+    var shareTopScoreTitle:SKLabelNode = SKLabelNode()
+    
     override func didMoveToView(view: SKView) {
+        
         // direct scene element linking
         backToMainMenuButton = self.childNodeWithName("backToMainMenuButton") as! SKLabelNode
         levelOneLeaderboardButton = self.childNodeWithName("levelOneLeaderboardButton") as! SKLabelNode
@@ -100,6 +107,9 @@ class LeaderboardScene:SKScene {
         // set the leaderboard box's position and z on screen
         leaderboardBox.position = CGPointMake(self.frame.width / 2, 400)
         leaderboardBox.zPosition = 2
+        
+        shareTopScoreTitle = leaderboardBox.childNodeWithName("shareTopScoreTitle") as! SKLabelNode
+        shareTopScoreTitle.alpha = 0
         
         // linking the names
         name1 = leaderboardBox.childNodeWithName("nameOne") as! SKLabelNode
@@ -217,6 +227,10 @@ class LeaderboardScene:SKScene {
                     self.leaderboardScores.sortInPlace({ $0.userScore > $1.userScore})
                     
                     self.filteredScores = self.leaderboardScores
+                    
+                    self.topScore = Score(_name: self.leaderboardScores[0].userName,
+                        _score: self.leaderboardScores[0].userScore,
+                        _stars: self.leaderboardScores[0].starRating)
                     
                     self.filterLeaderboard(5)
                 }
@@ -405,10 +419,24 @@ class LeaderboardScene:SKScene {
                     self.scoreFiveStarThree.alpha = 0
                 }
                 
+            } else if i > 5 {
+                break;
             }
             
             // increase the row counter
             i += 1
+        }
+        
+        if globalSelection == false {
+            let usersTopScore:String = String(self.topScore.userScore)
+            let topStarRating:String = String(self.topScore.starRating)
+            let content: FBSDKShareLinkContent = FBSDKShareLinkContent()
+            content.contentURL = NSURL(string: "https://www.finalhope.com")!
+            content.contentTitle = self.topScore.userName + " is sharing his top score!"
+            content.contentDescription = self.topScore.userName + " has scored " + usersTopScore + " points earning " + topStarRating + " stars in Final Hope!"
+            shareButton.shareContent = content
+            shareButton.center = CGPoint(x: 575, y: 215)
+            self.view!.addSubview(shareButton)
         }
         
         // show the leaderboard
@@ -434,6 +462,7 @@ class LeaderboardScene:SKScene {
                 mainMenu.scaleMode = .Fill
                 let transitionToScene:SKTransition = SKTransition.crossFadeWithDuration(1.0)
                 
+                self.shareButton.removeFromSuperview()
                 self.view?.presentScene(mainMenu, transition: transitionToScene)
             } else if spriteName == "levelOneLeaderboardButton" {
                 // show level one leaderboard
@@ -475,6 +504,8 @@ class LeaderboardScene:SKScene {
                 self.leaderboardScores = []
                 self.globalScoreSelection.fontColor = selectedColor
                 self.localScoreSelection.fontColor = unselectedColor
+                self.shareButton.alpha = 0
+                self.shareTopScoreTitle.alpha = 0
                 
                 clearLeaderboard()
                 
@@ -486,6 +517,8 @@ class LeaderboardScene:SKScene {
                 self.leaderboardScores = []
                 self.globalScoreSelection.fontColor = unselectedColor
                 self.localScoreSelection.fontColor = selectedColor
+                self.shareButton.alpha = 1
+                self.shareTopScoreTitle.alpha = 1
                 
                 clearLeaderboard()
                 
