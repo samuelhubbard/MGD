@@ -3,6 +3,18 @@
 // Final Hope
 // Current Version: Gold
 
+/*
+
+ There will be a warning in the console when using Facebook Sharing:
+ 2016-05-20 23:30:10.882 Final Hope[4691:388894] -canOpenURL: failed for URL: "fbauth2:/" - error: "(null)"
+ 
+ After my research, I found this in the documentation:
+    This is an Xcode warning indicating the the canOpenURL: call returned false. As long as you have configured the LSApplicationQueriesSchemes entry in your plist as described above, you can ignore this warning
+ 
+ So, I am ignoring this warning as per the documentation. The LSApplicationQueriesSchemes have been set up precisely to the specifications outlined in the setup for the Facebook SDK.
+ 
+ */
+
 import SpriteKit
 import FBSDKCoreKit
 import FBSDKShareKit
@@ -430,10 +442,20 @@ class LeaderboardScene:SKScene {
         if globalSelection == false {
             let usersTopScore:String = String(self.topScore.userScore)
             let topStarRating:String = String(self.topScore.starRating)
+            var selectedLevel:String = ""
             let content: FBSDKShareLinkContent = FBSDKShareLinkContent()
+            
+            if self.gameName == "LevelOne" {
+                selectedLevel = "1"
+            } else if self.gameName == "LevelTwo" {
+                selectedLevel = "2"
+            } else if self.gameName == "LevelThree" {
+                selectedLevel = "3"
+            }
+            
             content.contentURL = NSURL(string: "https://www.finalhope.com")!
             content.contentTitle = self.topScore.userName + " is sharing his top score!"
-            content.contentDescription = self.topScore.userName + " has scored " + usersTopScore + " points earning " + topStarRating + " stars in Final Hope!"
+            content.contentDescription = self.topScore.userName + " has scored " + usersTopScore + " points earning " + topStarRating + " stars on Level " + selectedLevel + " in Final Hope!"
             shareButton.shareContent = content
             shareButton.center = CGPoint(x: 575, y: 215)
             self.view!.addSubview(shareButton)
@@ -478,6 +500,8 @@ class LeaderboardScene:SKScene {
                 globalScoreSelection.alpha = 1
                 globalScoreSelection.fontColor = selectedColor
                 localScoreSelection.alpha = 1
+                levelTwoLeaderboardButton.fontColor = unselectedColor
+                levelThreeLeaderboardButton.fontColor = unselectedColor
                 
                 filterTitle.alpha = 1
                 allStarFilter.alpha = 1
@@ -486,6 +510,8 @@ class LeaderboardScene:SKScene {
                 twoStarFilter.alpha = 1
                 oneStarFilter.alpha = 1
                 zeroStarFilter.alpha = 1
+                shareTopScoreTitle.alpha = 0
+                shareButton.alpha = 0
                 
                 // hiding the leaderboard and clearing the array
                 self.leaderboardBox.alpha = 0
@@ -495,6 +521,38 @@ class LeaderboardScene:SKScene {
                 getLeaders()
             } else if spriteName == "levelTwoLeaderboardButton" {
                 // show level two leaderboard
+                
+                // clear the leaderboard
+                clearLeaderboard()
+                
+                // setting which leaderboard to pull from the BaaS
+                self.gameName = "LevelTwo"
+                self.globalSelection = true
+                
+                levelOneLeaderboardButton.fontColor = unselectedColor
+                levelTwoLeaderboardButton.fontColor = selectedColor
+                levelThreeLeaderboardButton.fontColor = unselectedColor
+                globalScoreSelection.alpha = 1
+                globalScoreSelection.fontColor = selectedColor
+                localScoreSelection.alpha = 1
+                
+                filterTitle.alpha = 1
+                allStarFilter.alpha = 1
+                allStarFilter.fontColor = selectedColor
+                threeStarFilter.alpha = 1
+                twoStarFilter.alpha = 1
+                oneStarFilter.alpha = 1
+                zeroStarFilter.alpha = 1
+                shareTopScoreTitle.alpha = 0
+                shareButton.alpha = 0
+                
+                // hiding the leaderboard and clearing the array
+                self.leaderboardBox.alpha = 0
+                self.leaderboardScores = []
+                
+                // pulling all of the relevent scores
+                getLeaders()
+
             } else if spriteName == "levelThreeLeaderboardButton" {
                 // show level three leaderboard
             } else if spriteName == "globalScoreSelection" {

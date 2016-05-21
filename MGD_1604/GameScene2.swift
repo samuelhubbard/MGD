@@ -20,11 +20,11 @@
  End Game Explosion Sound: Bart K.
  End Game Conditions Sound: Brandon Morris
  
-*/
+ */
 
 import SpriteKit
 
-class GameScene: SKScene, SKPhysicsContactDelegate {
+class GameScene2: SKScene, SKPhysicsContactDelegate {
     
     // setting up the contact barrier masks with bits
     let barrierMask:UInt32 = 0x1 << 0
@@ -35,6 +35,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var enemyTypeOne:SKSpriteNode = SKSpriteNode()
     var enemyTypeTwo:SKSpriteNode = SKSpriteNode()
     var enemyTypeThree:SKSpriteNode = SKSpriteNode()
+    var enemyTypeFour:SKSpriteNode = SKSpriteNode()
     var playerMech:SKSpriteNode = SKSpriteNode()
     var pauseButton:SKSpriteNode = SKSpriteNode()
     var fireButton:SKSpriteNode = SKSpriteNode()
@@ -55,19 +56,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var gameComplete:Bool = false
     var enemiesArray:[String] = []
     var projectilesInAir:Int = 0
-    var totalNumberOfProjectiles = 5
+    var totalNumberOfProjectiles = 6
     var totalTimeRemaining = 20
     var wonGame:Bool = false
     let remainingRoundMultiplier:Int = 20
     let remainingTimeMultiplier:Int = 3
-    var totalStarsAwarded:Int = 0 // futurecasting
     
+    // api and secret key needed for saving the score to the BaaS
     let apiKey = "0f3f60f530c7a19aaea37ec9d09283c2f3908fe541aa26f946d839141432a80d"
     let secretKey = "14487c8ed6ffd81b863c957150217752b85ad0e81d7321d658d471b880fbd472"
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
-                
+        
         // setting the contactDelegate (for collisions) to self
         self.physicsWorld.contactDelegate = self
         
@@ -75,6 +76,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemyTypeOne = self.childNodeWithName("enemyOne") as! SKSpriteNode
         enemyTypeTwo = self.childNodeWithName("enemyTwo") as! SKSpriteNode
         enemyTypeThree = self.childNodeWithName("enemyThree") as! SKSpriteNode
+        enemyTypeFour = self.childNodeWithName("enemyFour") as! SKSpriteNode
         playerMech = self.childNodeWithName("mech") as! SKSpriteNode
         pauseButton = self.childNodeWithName("pauseButton") as! SKSpriteNode
         fireButton = self.childNodeWithName("fireButton") as! SKSpriteNode
@@ -100,8 +102,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // linking to the texture atlas
         explosionTextureAtlas = SKTextureAtlas(named: "Explosion")
-                
-        // looping through the array to 
+        
+        // looping through the array to
         for i in 1...explosionTextureAtlas.textureNames.count {
             let textureName = "explosion\(i).png"
             explosionTextureArray.append(SKTexture(imageNamed: textureName))
@@ -158,9 +160,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let enemyThreeSequence = SKAction.sequence([enemyThreePatrolOne, enemyThreePatrolTwo])
         enemyTypeThree.runAction(SKAction.repeatActionForever(enemyThreeSequence), withKey: "e3KeyAnimation")
         
+        // create the first animation for the first half of the patrol for enemy 2
+        let enemyFourPatrolOne = SKAction.moveByX(1805.0, y: 0.0, duration: 3.0)
+        // set the timing mode for the first half of the animation
+        enemyFourPatrolOne.timingMode = .EaseInEaseOut
+        
+        // create the second animation for the second half of the patrol for enemy 2
+        let enemyFourPatrolTwo = SKAction.moveByX(-1805.0, y: 0.0, duration: 3.0)
+        // set the timing mode for the second half of the animation
+        enemyFourPatrolTwo.timingMode = .EaseInEaseOut
+        
+        // create the sequence for enemy 2's patrol animation, assign it to the sprite and run forever
+        let enemyFourSequence = SKAction.sequence([enemyFourPatrolOne, enemyFourPatrolTwo])
+        enemyTypeFour.runAction(SKAction.repeatActionForever(enemyFourSequence), withKey: "e4KeyAnimation")
+        
         // start running the timer
         runTimer()
-
+        
     }
     
     func runTimer() {
@@ -187,7 +203,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-       /* Called when a touch begins */
+        /* Called when a touch begins */
         
         // run a for loop for the touch
         for touch:AnyObject! in touches {
@@ -214,20 +230,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if gamePaused == false {
                     self.runAction(SKAction.playSoundFileNamed("mech.wav", waitForCompletion: true))
                 }
-            // if the pause button was hit
+                // if the pause button was hit
             } else if spriteName == "pauseButton" {
                 // if the game is not currently paused
                 if gamePaused == false && wonGame == false {
                     // pause it and set the boolean to indicate the game is now paused
                     scene!.view!.paused = true
                     gamePaused = true
-                // if the game is currently paused
+                    // if the game is currently paused
                 } else if gamePaused == true && wonGame == false {
                     // "unpause" it and set the boolean to indicate the game is now "unpaused"
                     scene!.view!.paused = false
                     gamePaused = false
                 }
-            // if none of sprites listed above were touched, fire a projectile!
+                // if none of sprites listed above were touched, fire a projectile!
             } else if spriteName == "fireButton" {
                 if gamePaused == false && totalNumberOfProjectiles > 0 {
                     
@@ -240,27 +256,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     
                     // set a constant to the projectile sprite located in a different scene
                     let projectile:SKSpriteNode = SKScene(fileNamed: "Projectile")!.childNodeWithName("projectile")! as! SKSpriteNode
-                
+                    
                     // play the sound for firing a projectile
                     self.runAction(SKAction.playSoundFileNamed("ProjectileFired.wav", waitForCompletion: true))
-                
+                    
                     // remove the projectile from it's current parent and add it to this scene
                     projectile.removeFromParent()
                     self.addChild(projectile)
-                
+                    
                     // set the projectile's position and z on screen
                     projectile.position = playerMech.position
                     projectile.zPosition = 1
-                
+                    
                     // shoot the projectile out
                     projectile.physicsBody?.applyImpulse(CGVectorMake(90.0, 190.0))
-                
+                    
                     // set the collision bit mask and contact test bit mask for the projectile
                     projectile.physicsBody?.collisionBitMask = barrierMask | enemyMask
                     projectile.physicsBody?.contactTestBitMask = projectile.physicsBody!.collisionBitMask
                 }
             } else if spriteName == "restartLevel" {
-                let restartGame = GameScene(fileNamed: "GameScene")
+                let restartGame = GameScene2(fileNamed: "GameScene2")
                 
                 restartGame!.scaleMode = .Fill
                 let transitionToScene:SKTransition = SKTransition.crossFadeWithDuration(2.0)
@@ -273,17 +289,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 let transitionToScene:SKTransition = SKTransition.crossFadeWithDuration(2.0)
                 
                 self.view?.presentScene(mainMenu!, transition: transitionToScene)
-            } else if spriteName == "nextLevel" {
-                let nextLevel = GameScene2(fileNamed: "GameScene2")
-                
-                nextLevel!.scaleMode = .Fill
-                let transitionToScene:SKTransition = SKTransition.crossFadeWithDuration(2.0)
-                
-                self.view?.presentScene(nextLevel!, transition: transitionToScene)
             }
         }
     }
-   
+    
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
         
@@ -294,14 +303,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 self.animateExplosion()
                 gameComplete = true
             }
-            
-            // just incase of an error
+                
+                // just incase of an error
             else if !enemiesArray.isEmpty && totalNumberOfProjectiles == 0 && projectilesInAir == 0 {
                 wonGame = false
                 self.animateExplosion()
                 gameComplete = true
             }
-            
+                
             else if !enemiesArray.isEmpty && totalTimeRemaining == 0 {
                 wonGame = false
                 self.animateExplosion()
@@ -417,6 +426,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         self.enemyTypeTwo.removeActionForKey("e2KeyAnimation")
                     } else if enemy == "enemyThree" {
                         self.enemyTypeThree.removeActionForKey("e3KeyAnimation")
+                    } else if enemy == "enemyFour" {
+                        self.enemyTypeThree.removeActionForKey("e4KeyAnimation")
                     }
                 }
             }
@@ -442,7 +453,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 let fade = SKAction.fadeAlphaTo(1, duration: 0.001)
                 self.winConditionsLabel.runAction(fade)
                 let soundWaiting = SKAction.waitForDuration(0.5)
-                let playSound = SKAction.runBlock({ 
+                let playSound = SKAction.runBlock({
                     self.runAction(SKAction.playSoundFileNamed("EndConditions.mp3", waitForCompletion: true))
                 })
                 
@@ -458,15 +469,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         let scoreBox:SKSpriteNode = SKScene(fileNamed: "ScoreScene")!.childNodeWithName("scoreBox")! as! SKSpriteNode
                         
                         scoreBox.alpha = 0
-                    
+                        
                         // remove the projectile from it's current parent and add it to this scene
                         scoreBox.removeFromParent()
                         self.addChild(scoreBox)
-                    
+                        
                         // set the score box's position and z on screen
                         scoreBox.position = CGPointMake(self.frame.width / 2, self.frame.height / 2)
                         scoreBox.zPosition = 4
-                    
+                        
                         // pull all of the applicable children from the score box
                         var scoreFromRounds:SKLabelNode = SKLabelNode()
                         var scoreFromTime:SKLabelNode = SKLabelNode()
@@ -488,7 +499,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         // running the calculations for the score
                         let calculatedRoundsScore:Int = self.totalNumberOfProjectiles * self.remainingRoundMultiplier
                         let calculatedTimeScore:Int = self.totalTimeRemaining * self.remainingTimeMultiplier
-                    
+                        
                         // Displaying the score
                         scoreFromRounds.text = String(calculatedRoundsScore)
                         scoreFromTime.text = String(calculatedTimeScore)
@@ -504,26 +515,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                             starOne.alpha = 1
                             starTwo.alpha = 1
                             starThree.alpha = 1
-                            
-                            self.totalStarsAwarded = 3
                         } else if calculatedTotalScore <= 74 && calculatedTotalScore >= 50 {
                             starOne.alpha = 1
                             starTwo.alpha = 1
                             starThree.alpha = 0
-                            
-                            self.totalStarsAwarded = 2
                         } else if calculatedTotalScore <= 49 && calculatedTotalScore >= 30 {
                             starOne.alpha = 1
                             starTwo.alpha = 0
                             starThree.alpha = 0
-                            
-                            self.totalStarsAwarded = 1
                         } else if calculatedTotalScore <= 29 {
                             starOne.alpha = 0
                             starTwo.alpha = 0
                             starThree.alpha = 0
-                            
-                            self.totalStarsAwarded = 0
                         }
                         
                         // adding a score to the leaderboard
@@ -543,7 +546,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                                 
                                 // this is where the score will be added
                                 
-                                let gameName = "LevelOne"
+                                let gameName = "LevelTwo"
                                 let userName = user.userName
                                 let gameScore:Double = Double(calculatedTotalScore)
                                 App42API.initializeWithAPIKey(self.apiKey, andSecretKey: self.secretKey)
@@ -552,7 +555,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                                     if(success)
                                     {
                                         let game = response as! Game
-                                        print(game.name)
                                         let scoreList = game.scoreList
                                         for score in scoreList
                                         {
@@ -560,30 +562,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                                             let scoreValue = score.value as Double
                                             print(scoreValue)
                                             print(score.scoreId)
-                                        }  
-                                    }  
-                                    else  
-                                    {  
+                                        }
+                                    }
+                                    else
+                                    {
                                         print(exception.reason!)
                                         print(exception.appErrorCode)
                                         print(exception.httpErrorCode)
                                         print(exception.userInfo!)
-                                    }  
+                                    }
                                 })
-                            }  
-                            else  
-                            {  
+                            }
+                            else
+                            {
                                 print(exception.reason!)
                                 print(exception.appErrorCode)
                                 print(exception.httpErrorCode)
                                 print(exception.userInfo!)
-                            }  
+                            }
                         })
                         
                         // define the fade in action and run it to show the score box
                         let fadeScoreIn = SKAction.fadeAlphaTo(1, duration: 0.5)
                         scoreBox.runAction(fadeScoreIn)
-                    // if the player lost the game
+                        // if the player lost the game
                     } else {
                         // go back to the main menu
                         

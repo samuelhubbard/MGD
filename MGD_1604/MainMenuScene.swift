@@ -11,6 +11,7 @@ class MainMenuScene: SKScene {
     var instructionsButton:SKLabelNode = SKLabelNode()
     var creditsButton:SKLabelNode = SKLabelNode()
     var leaderboardButton:SKLabelNode = SKLabelNode()
+    var levelSelection:SKLabelNode = SKLabelNode()
     
     let apiKey = "0f3f60f530c7a19aaea37ec9d09283c2f3908fe541aa26f946d839141432a80d"
     let secretKey = "14487c8ed6ffd81b863c957150217752b85ad0e81d7321d658d471b880fbd472"
@@ -21,6 +22,7 @@ class MainMenuScene: SKScene {
         instructionsButton = self.childNodeWithName("instructionsButton") as! SKLabelNode
         creditsButton = self.childNodeWithName("creditsButton") as! SKLabelNode
         leaderboardButton = self.childNodeWithName("leaderboardButton") as! SKLabelNode
+        levelSelection = self.childNodeWithName("levelSelection") as! SKLabelNode
 
     }
 
@@ -77,6 +79,16 @@ class MainMenuScene: SKScene {
                 
                 // perform the transition
                 self.view?.presentScene(leaderboardScene, transition: transitionToScene)
+            } else if spriteName == "levelSelection" {
+                // set the scene that will be transitioned into
+                let levelSelectionScene:LevelSelection = LevelSelection(fileNamed: "LevelSelection")!
+                
+                // add the required definitions (scaleMode and the transition animation)
+                levelSelectionScene.scaleMode = .Fill
+                let transitionToScene:SKTransition = SKTransition.crossFadeWithDuration(1.0)
+                
+                // perform the transition
+                self.view?.presentScene(levelSelectionScene, transition: transitionToScene)
             }
         }
     }
