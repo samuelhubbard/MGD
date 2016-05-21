@@ -3,3 +3,5 @@
 //
 
 #import<Shephertz_App42_iOS_API/Shephertz_App42_iOS_API.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKShareKit/FBSDKShareKit.h>

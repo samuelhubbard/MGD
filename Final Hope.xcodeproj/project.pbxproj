@@ -35,6 +35,8 @@
 		86A398F01CF0A314005C6854 /* GameScene2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A398EF1CF0A314005C6854 /* GameScene2.swift */; };
 		86A398F21CF0A783005C6854 /* LevelSelection.sks in Resources */ = {isa = PBXBuildFile; fileRef = 86A398F11CF0A783005C6854 /* LevelSelection.sks */; };
 		86A398F61CF0A832005C6854 /* LevelSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A398F51CF0A832005C6854 /* LevelSelection.swift */; };
+		86A398F91CF0D03C005C6854 /* GameScene3.sks in Resources */ = {isa = PBXBuildFile; fileRef = 86A398F81CF0D03C005C6854 /* GameScene3.sks */; };
+		86A398FB1CF0D096005C6854 /* GameScene3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A398FA1CF0D096005C6854 /* GameScene3.swift */; };
 		86C08C8A1CE2366800314A54 /* ScoreScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 86C08C891CE2366800314A54 /* ScoreScene.sks */; };
 		86C3CC071CEAA8380025F93B /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86C3CC061CEAA8380025F93B /* CoreTelephony.framework */; };
 		86C3CC091CEAA8470025F93B /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86C3CC081CEAA8470025F93B /* CoreFoundation.framework */; };
@@ -99,6 +101,8 @@
 		86A398EF1CF0A314005C6854 /* GameScene2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene2.swift; sourceTree = "<group>"; };
 		86A398F11CF0A783005C6854 /* LevelSelection.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LevelSelection.sks; sourceTree = "<group>"; };
 		86A398F51CF0A832005C6854 /* LevelSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelSelection.swift; sourceTree = "<group>"; };
+		86A398F81CF0D03C005C6854 /* GameScene3.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene3.sks; sourceTree = "<group>"; };
+		86A398FA1CF0D096005C6854 /* GameScene3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene3.swift; sourceTree = "<group>"; };
 		86C08C891CE2366800314A54 /* ScoreScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ScoreScene.sks; sourceTree = "<group>"; };
 		86C3CC061CEAA8380025F93B /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		86C3CC081CEAA8470025F93B /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -168,6 +172,7 @@
 				86A398F51CF0A832005C6854 /* LevelSelection.swift */,
 				86C3F29D1CB4B84500167F06 /* GameScene.swift */,
 				86A398EF1CF0A314005C6854 /* GameScene2.swift */,
+				86A398FA1CF0D096005C6854 /* GameScene3.swift */,
 				86085A451CED4F1700B8CA5B /* LeaderboardScene.swift */,
 				863B7F8C1CCF04E000A2ACFB /* CreditsScene.swift */,
 				863B7F881CCF02DD00A2ACFB /* InstructionsScene.swift */,
@@ -183,12 +188,11 @@
 				86A398F11CF0A783005C6854 /* LevelSelection.sks */,
 				86C3F29B1CB4B84500167F06 /* GameScene.sks */,
 				86A398ED1CF0A26E005C6854 /* GameScene2.sks */,
+				86A398F81CF0D03C005C6854 /* GameScene3.sks */,
 				863B7F861CCF02B400A2ACFB /* InstructionsScene.sks */,
 				863B7F8A1CCF04CE00A2ACFB /* CreditsScene.sks */,
 				86085A411CED4C4A00B8CA5B /* LeaderboardScene.sks */,
-				86309D8C1CBF0A8000DCDF5D /* Projectile.sks */,
-				86C08C891CE2366800314A54 /* ScoreScene.sks */,
-				86085A491CED550A00B8CA5B /* LeaderboardTemplateScene.sks */,
+				86A398F71CF0BB16005C6854 /* Supplemental Scenes */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -223,6 +227,16 @@
 				8684CBD51CC7194D00963526 /* Explosion.atlas */,
 			);
 			name = EndExplosionAnimation;
+			sourceTree = "<group>";
+		};
+		86A398F71CF0BB16005C6854 /* Supplemental Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				86309D8C1CBF0A8000DCDF5D /* Projectile.sks */,
+				86C08C891CE2366800314A54 /* ScoreScene.sks */,
+				86085A491CED550A00B8CA5B /* LeaderboardTemplateScene.sks */,
+			);
+			name = "Supplemental Scenes";
 			sourceTree = "<group>";
 		};
 		86C3CC0C1CEAA86C0025F93B /* Frameworks */ = {
@@ -417,6 +431,7 @@
 				86C3F2A51CB4B84500167F06 /* Assets.xcassets in Resources */,
 				86C08C8A1CE2366800314A54 /* ScoreScene.sks in Resources */,
 				86A398EC1CF002F8005C6854 /* Default-568h@2x.png in Resources */,
+				86A398F91CF0D03C005C6854 /* GameScene3.sks in Resources */,
 				86C3F2A31CB4B84500167F06 /* Main.storyboard in Resources */,
 				863B7F831CCEF53C00A2ACFB /* MainMenuScene.sks in Resources */,
 				86A398F21CF0A783005C6854 /* LevelSelection.sks in Resources */,
@@ -452,6 +467,7 @@
 			files = (
 				86C3F29E1CB4B84500167F06 /* GameScene.swift in Sources */,
 				86C3F2A01CB4B84500167F06 /* GameViewController.swift in Sources */,
+				86A398FB1CF0D096005C6854 /* GameScene3.swift in Sources */,
 				86085A4E1CEEA82100B8CA5B /* Score.swift in Sources */,
 				86A398F01CF0A314005C6854 /* GameScene2.swift in Sources */,
 				863B7F851CCEF57000A2ACFB /* MainMenuScene.swift in Sources */,

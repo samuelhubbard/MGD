@@ -10,11 +10,13 @@ import SpriteKit
 
 class LevelSelection: SKScene {
     
+    // instantiating the nodes
     var levelOneStart:SKLabelNode = SKLabelNode()
     var levelTwoStart:SKLabelNode = SKLabelNode()
     var levelThreeStart:SKLabelNode = SKLabelNode()
 
     override func didMoveToView(view: SKView) {
+        // linking the label nodes to the scene
         levelOneStart = self.childNodeWithName("levelOneStart") as! SKLabelNode
         levelTwoStart = self.childNodeWithName("levelTwoStart") as! SKLabelNode
         levelThreeStart = self.childNodeWithName("levelThreeStart") as! SKLabelNode
@@ -54,7 +56,7 @@ class LevelSelection: SKScene {
                 self.view?.presentScene(gameMode, transition: transitionToScene)
             } else if spriteName == "levelThreeStart" {
                 // set the scene that will be transitioned into
-                let gameMode:GameScene = GameScene(fileNamed: "GameScene")!
+                let gameMode:GameScene3 = GameScene3(fileNamed: "GameScene3")!
                 
                 // add the required definitions (scaleMode and the transition animation)
                 gameMode.scaleMode = .Fill

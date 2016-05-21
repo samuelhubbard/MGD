@@ -11,13 +11,11 @@
  After my research, I found this in the documentation:
     This is an Xcode warning indicating the the canOpenURL: call returned false. As long as you have configured the LSApplicationQueriesSchemes entry in your plist as described above, you can ignore this warning
  
- So, I am ignoring this warning as per the documentation. The LSApplicationQueriesSchemes have been set up precisely to the specifications outlined in the setup for the Facebook SDK.
+ So, I am ignoring this warning as per the Facebook SDK documentation. The LSApplicationQueriesSchemes have been set up precisely to the specifications outlined in the setup for the Facebook SDK and the sharing still works as advertised.
  
  */
 
 import SpriteKit
-import FBSDKCoreKit
-import FBSDKShareKit
 
 class LeaderboardScene:SKScene {
     // clickable elements from the sks file
@@ -76,6 +74,7 @@ class LeaderboardScene:SKScene {
     var scoreFiveStarTwo:SKSpriteNode = SKSpriteNode()
     var scoreFiveStarThree:SKSpriteNode = SKSpriteNode()
     
+    // sharing elements
     let shareButton: FBSDKShareButton = FBSDKShareButton()
     var topScore:Score!
     var shareTopScoreTitle:SKLabelNode = SKLabelNode()
@@ -177,13 +176,13 @@ class LeaderboardScene:SKScene {
                         // pull in the score and set it to a double
                         let scoreValue = score.value as Double
                         
-                        if scoreValue >= 75 {
+                        if scoreValue >= 85 {
                             starRating = 3
-                        } else if scoreValue <= 74 && scoreValue >= 50 {
+                        } else if scoreValue <= 84 && scoreValue >= 60 {
                             starRating = 2
-                        } else if scoreValue <= 49 && scoreValue >= 30 {
+                        } else if scoreValue <= 59 && scoreValue >= 40 {
                             starRating = 1
-                        } else if scoreValue <= 29 {
+                        } else if scoreValue <= 39 {
                             starRating = 0
                         }
                         
@@ -192,8 +191,10 @@ class LeaderboardScene:SKScene {
                         self.leaderboardScores.append(currentScore)
                     }
                     
+                    // set  the filtered scores to the entire leaderboard array
                     self.filteredScores = self.leaderboardScores
                     
+                    // filter the leaderboard inputing an arbitrary number that is outside of the range of 0-3
                     self.filterLeaderboard(5)
                 }
                 else
@@ -221,13 +222,14 @@ class LeaderboardScene:SKScene {
                         // pull in the score and set it to a double
                         let scoreValue = score.value as Double
                         
-                        if scoreValue >= 75 {
+                        // set the star rating based on the score
+                        if scoreValue >= 85 {
                             starRating = 3
-                        } else if scoreValue <= 74 && scoreValue >= 50 {
+                        } else if scoreValue <= 84 && scoreValue >= 60 {
                             starRating = 2
-                        } else if scoreValue <= 49 && scoreValue >= 30 {
+                        } else if scoreValue <= 59 && scoreValue >= 40 {
                             starRating = 1
-                        } else if scoreValue <= 29 {
+                        } else if scoreValue <= 39 {
                             starRating = 0
                         }
                         
@@ -236,14 +238,18 @@ class LeaderboardScene:SKScene {
                         self.leaderboardScores.append(currentScore)
                     }
                     
+                    // sort the scores that came in
                     self.leaderboardScores.sortInPlace({ $0.userScore > $1.userScore})
                     
+                    // set the filtered array to the leader array
                     self.filteredScores = self.leaderboardScores
                     
+                    // pull in the top score for sharing
                     self.topScore = Score(_name: self.leaderboardScores[0].userName,
                         _score: self.leaderboardScores[0].userScore,
                         _stars: self.leaderboardScores[0].starRating)
                     
+                    // filter the scores using arbitrary number outside of the range of 0-3
                     self.filterLeaderboard(5)
                 }
                 else
@@ -293,20 +299,29 @@ class LeaderboardScene:SKScene {
     }
     
     func filterLeaderboard(filter:Int) {
+        // clear the leaderboard
         clearLeaderboard()
         
+        // if the filter is set at an appropriate star rating
         if filter >= 0 && filter < 4 {
+            // clear the filtered scores array
             self.filteredScores = []
             
+            // loop through the leader array
             for score in self.leaderboardScores {
+                // if the star rating is equal to the chosen filter
                 if score.starRating == filter {
+                    // add that score to the filtered array
                     self.filteredScores.append(score)
                 }
             }
+        // if the filter is outside of the appropriate star rating range
         } else {
+            // make the filtered array equivalent to the leader array
             self.filteredScores = self.leaderboardScores
         }
         
+        // initiate the function to populate the leaderboard
         populateLeaderboard()
     }
     
@@ -314,12 +329,15 @@ class LeaderboardScene:SKScene {
         // set an integer for a row counter for leaderboard population
         var i:Int = 1
         
+        // loop through all of the scores in the filtered array
         for leaders in self.filteredScores {
+            // i is indicative of what row is being populated.
             if i == 1 {
                 // set the user and score to the leaderboard display
                 self.name1.text = leaders.userName
                 self.score1.text = String(leaders.userScore)
                 
+                // show appropriate amount of stars per score based on the star rating
                 if leaders.starRating == 3 {
                     self.scoreOneStarOne.alpha = 1
                     self.scoreOneStarTwo.alpha = 1
@@ -343,108 +361,120 @@ class LeaderboardScene:SKScene {
                 // set the user and score to the leaderboard display
                 self.name2.text = leaders.userName
                 self.score2.text = String(leaders.userScore)
-                if leaders.userScore >= 75 {
+                
+                // show appropriate amount of stars per score based on the star rating
+                if leaders.starRating == 3 {
                     self.scoreTwoStarOne.alpha = 1
                     self.scoreTwoStarTwo.alpha = 1
                     self.scoreTwoStarThree.alpha = 1
                     
-                } else if leaders.userScore <= 74 && leaders.userScore >= 50 {
+                } else if leaders.starRating == 2 {
                     self.scoreTwoStarOne.alpha = 1
                     self.scoreTwoStarTwo.alpha = 1
                     self.scoreTwoStarThree.alpha = 0
-                } else if leaders.userScore <= 49 && leaders.userScore >= 30 {
+                } else if leaders.starRating == 1 {
                     self.scoreTwoStarOne.alpha = 1
                     self.scoreTwoStarTwo.alpha = 0
                     self.scoreTwoStarThree.alpha = 0
-                } else if leaders.userScore <= 29 {
+                } else if leaders.starRating == 0 {
                     self.scoreTwoStarOne.alpha = 0
                     self.scoreTwoStarTwo.alpha = 0
                     self.scoreTwoStarThree.alpha = 0
                 }
                 
             } else if i == 3 {
+                // set the user and score to the leaderboard display
                 self.name3.text = leaders.userName
                 self.score3.text = String(leaders.userScore)
                 
-                if leaders.userScore >= 75 {
+                // show appropriate amount of stars per score based on the star rating
+                if leaders.starRating == 3 {
                     self.scoreThreeStarOne.alpha = 1
                     self.scoreThreeStarTwo.alpha = 1
                     self.scoreThreeStarThree.alpha = 1
                     
-                } else if leaders.userScore <= 74 && leaders.userScore >= 50 {
+                } else if leaders.starRating == 2 {
                     self.scoreThreeStarOne.alpha = 1
                     self.scoreThreeStarTwo.alpha = 1
                     self.scoreThreeStarThree.alpha = 0
-                } else if leaders.userScore <= 49 && leaders.userScore >= 30 {
+                } else if leaders.starRating == 1 {
                     self.scoreThreeStarOne.alpha = 1
                     self.scoreThreeStarTwo.alpha = 0
                     self.scoreThreeStarThree.alpha = 0
-                } else if leaders.userScore <= 29 {
+                } else if leaders.starRating == 0 {
                     self.scoreThreeStarOne.alpha = 0
                     self.scoreThreeStarTwo.alpha = 0
                     self.scoreThreeStarThree.alpha = 0
                 }
                 
             } else if i == 4 {
+                // set the user and score to the leaderboard display
                 self.name4.text = leaders.userName
                 self.score4.text = String(leaders.userScore)
                 
-                if leaders.userScore >= 75 {
+                // show appropriate amount of stars per score based on the star rating
+                if leaders.starRating == 3 {
                     self.scoreFourStarOne.alpha = 1
                     self.scoreFourStarTwo.alpha = 1
                     self.scoreFourStarThree.alpha = 1
                     
-                } else if leaders.userScore <= 74 && leaders.userScore >= 50 {
+                } else if leaders.starRating == 2 {
                     self.scoreFourStarOne.alpha = 1
                     self.scoreFourStarTwo.alpha = 1
                     self.scoreFourStarThree.alpha = 0
-                } else if leaders.userScore <= 49 && leaders.userScore >= 30 {
+                } else if leaders.starRating == 1 {
                     self.scoreFourStarOne.alpha = 1
                     self.scoreFourStarTwo.alpha = 0
                     self.scoreFourStarThree.alpha = 0
-                } else if leaders.userScore <= 29 {
+                } else if leaders.starRating == 0 {
                     self.scoreFourStarOne.alpha = 0
                     self.scoreFourStarTwo.alpha = 0
                     self.scoreFourStarThree.alpha = 0
                 }
                 
             } else if i == 5 {
+                // set the user and score to the leaderboard display
                 self.name5.text = leaders.userName
                 self.score5.text = String(leaders.userScore)
                 
-                if leaders.userScore >= 75 {
+                // show appropriate amount of stars per score based on the star rating
+                if leaders.starRating == 3 {
                     self.scoreFiveStarOne.alpha = 1
                     self.scoreFiveStarTwo.alpha = 1
                     self.scoreFiveStarThree.alpha = 1
-                    
-                } else if leaders.userScore <= 74 && leaders.userScore >= 50 {
+                } else if leaders.starRating == 2 {
                     self.scoreFiveStarOne.alpha = 1
                     self.scoreFiveStarTwo.alpha = 1
                     self.scoreFiveStarThree.alpha = 0
-                } else if leaders.userScore <= 49 && leaders.userScore >= 30 {
+                } else if leaders.starRating == 1 {
                     self.scoreFiveStarOne.alpha = 1
                     self.scoreFiveStarTwo.alpha = 0
                     self.scoreFiveStarThree.alpha = 0
-                } else if leaders.userScore <= 29 {
+                } else if leaders.starRating == 0 {
                     self.scoreFiveStarOne.alpha = 0
                     self.scoreFiveStarTwo.alpha = 0
                     self.scoreFiveStarThree.alpha = 0
                 }
                 
+            // when the leaderboard is full, break out of the loop
             } else if i > 5 {
-                break;
+                break
             }
             
             // increase the row counter
             i += 1
         }
         
+        // if the local leaderboard (only the user's scores) was chosen
         if globalSelection == false {
+            // pull in that user's top score
             let usersTopScore:String = String(self.topScore.userScore)
             let topStarRating:String = String(self.topScore.starRating)
             var selectedLevel:String = ""
+            // set up the content to be shared
             let content: FBSDKShareLinkContent = FBSDKShareLinkContent()
             
+            // apply what level the score is coming from
             if self.gameName == "LevelOne" {
                 selectedLevel = "1"
             } else if self.gameName == "LevelTwo" {
@@ -453,11 +483,17 @@ class LeaderboardScene:SKScene {
                 selectedLevel = "3"
             }
             
+            // Website isn't real... but I needed a link
             content.contentURL = NSURL(string: "https://www.finalhope.com")!
+            // the title of what will be shared
             content.contentTitle = self.topScore.userName + " is sharing his top score!"
+            // the description of what will be shared
             content.contentDescription = self.topScore.userName + " has scored " + usersTopScore + " points earning " + topStarRating + " stars on Level " + selectedLevel + " in Final Hope!"
+            // set the button to share the content
             shareButton.shareContent = content
+            // position the button
             shareButton.center = CGPoint(x: 575, y: 215)
+            // add the button to the screen
             self.view!.addSubview(shareButton)
         }
         
@@ -496,13 +532,13 @@ class LeaderboardScene:SKScene {
                 self.gameName = "LevelOne"
                 self.globalSelection = true
                 
+                // setting the alpha and selected colors of what will be shown
                 levelOneLeaderboardButton.fontColor = selectedColor
                 globalScoreSelection.alpha = 1
                 globalScoreSelection.fontColor = selectedColor
                 localScoreSelection.alpha = 1
                 levelTwoLeaderboardButton.fontColor = unselectedColor
                 levelThreeLeaderboardButton.fontColor = unselectedColor
-                
                 filterTitle.alpha = 1
                 allStarFilter.alpha = 1
                 allStarFilter.fontColor = selectedColor
@@ -529,13 +565,13 @@ class LeaderboardScene:SKScene {
                 self.gameName = "LevelTwo"
                 self.globalSelection = true
                 
+                // setting the alpha and selected colors of what will be shown
                 levelOneLeaderboardButton.fontColor = unselectedColor
                 levelTwoLeaderboardButton.fontColor = selectedColor
                 levelThreeLeaderboardButton.fontColor = unselectedColor
                 globalScoreSelection.alpha = 1
                 globalScoreSelection.fontColor = selectedColor
                 localScoreSelection.alpha = 1
-                
                 filterTitle.alpha = 1
                 allStarFilter.alpha = 1
                 allStarFilter.fontColor = selectedColor
@@ -555,9 +591,42 @@ class LeaderboardScene:SKScene {
 
             } else if spriteName == "levelThreeLeaderboardButton" {
                 // show level three leaderboard
+                
+                // clear the leaderboard
+                clearLeaderboard()
+                
+                // setting which leaderboard to pull from the BaaS
+                self.gameName = "LevelThree"
+                self.globalSelection = true
+                
+                // setting the alpha and selected colors of what will be shown
+                levelOneLeaderboardButton.fontColor = unselectedColor
+                levelTwoLeaderboardButton.fontColor = unselectedColor
+                levelThreeLeaderboardButton.fontColor = selectedColor
+                globalScoreSelection.alpha = 1
+                globalScoreSelection.fontColor = selectedColor
+                localScoreSelection.alpha = 1
+                filterTitle.alpha = 1
+                allStarFilter.alpha = 1
+                allStarFilter.fontColor = selectedColor
+                threeStarFilter.alpha = 1
+                twoStarFilter.alpha = 1
+                oneStarFilter.alpha = 1
+                zeroStarFilter.alpha = 1
+                shareTopScoreTitle.alpha = 0
+                shareButton.alpha = 0
+                
+                // hiding the leaderboard and clearing the array
+                self.leaderboardBox.alpha = 0
+                self.leaderboardScores = []
+                
+                // pulling all of the relevent scores
+                getLeaders()
+
             } else if spriteName == "globalScoreSelection" {
                 // display filters and show 'all' leaderboard
                 
+                // set the appropriate alphas and text colors
                 self.globalSelection = true
                 self.leaderboardScores = []
                 self.globalScoreSelection.fontColor = selectedColor
@@ -565,12 +634,15 @@ class LeaderboardScene:SKScene {
                 self.shareButton.alpha = 0
                 self.shareTopScoreTitle.alpha = 0
                 
+                // clear out whatever is currently in the leaderboard
                 clearLeaderboard()
                 
+                // pull in all of the relevent scores
                 getLeaders()
             } else if spriteName == "localScoreSelection" {
                 // display filters and show 'all' leaderboard
                 
+                // set the appropriate alphas and text colors
                 self.globalSelection = false
                 self.leaderboardScores = []
                 self.globalScoreSelection.fontColor = unselectedColor
@@ -578,64 +650,78 @@ class LeaderboardScene:SKScene {
                 self.shareButton.alpha = 1
                 self.shareTopScoreTitle.alpha = 1
                 
+                // clear out whatever is currently in the leaderboard
                 clearLeaderboard()
                 
+                // pull in all of the relevent scores
                 getLeaders()
             } else if spriteName == "allStarFilter" {
                 // display top 5 across all star levels
+                
+                // set the filtered array appropriately
                 self.filteredScores = self.leaderboardScores
                 
+                // set the text colors to indicate proper selection
                 self.allStarFilter.fontColor = selectedColor
                 self.threeStarFilter.fontColor = unselectedColor
                 self.twoStarFilter.fontColor = unselectedColor
                 self.oneStarFilter.fontColor = unselectedColor
                 self.zeroStarFilter.fontColor = unselectedColor
                 
+                // clear the leaderboard and then run the filter
                 clearLeaderboard()
                 filterLeaderboard(5)
                 
             } else if spriteName == "threeStarFilter" {
                 // display only 3 star ratings
                 
+                // set the text colors to indicate proper selection
                 self.allStarFilter.fontColor = unselectedColor
                 self.threeStarFilter.fontColor = selectedColor
                 self.twoStarFilter.fontColor = unselectedColor
                 self.oneStarFilter.fontColor = unselectedColor
                 self.zeroStarFilter.fontColor = unselectedColor
                 
+                // clear the leaderboard and then run the filter with appropriate star rating
                 clearLeaderboard()
                 filterLeaderboard(3)
             } else if spriteName == "twoStarFilter" {
                 // display only 2 star ratings
                 
+                // set the text colors to indicate proper selection
                 self.allStarFilter.fontColor = unselectedColor
                 self.threeStarFilter.fontColor = unselectedColor
                 self.twoStarFilter.fontColor = selectedColor
                 self.oneStarFilter.fontColor = unselectedColor
                 self.zeroStarFilter.fontColor = unselectedColor
                 
+                // clear the leaderboard and then run the filter with appropriate star rating
                 clearLeaderboard()
                 filterLeaderboard(2)
             } else if spriteName == "oneStarFilter" {
                 // display only 1 star ratings
                 
+                // set the text colors to indicate proper selection
                 self.allStarFilter.fontColor = unselectedColor
                 self.threeStarFilter.fontColor = unselectedColor
                 self.twoStarFilter.fontColor = unselectedColor
                 self.oneStarFilter.fontColor = selectedColor
                 self.zeroStarFilter.fontColor = unselectedColor
                 
+                // clear the leaderboard and then run the filter with appropriate star rating
                 clearLeaderboard()
                 filterLeaderboard(1)
             } else if spriteName == "zeroStarFilter" {
                 // display only 0 star ratings
                 
+                // set all the text colors to indicate proper selection
                 self.allStarFilter.fontColor = unselectedColor
                 self.threeStarFilter.fontColor = unselectedColor
                 self.twoStarFilter.fontColor = unselectedColor
                 self.oneStarFilter.fontColor = unselectedColor
                 self.zeroStarFilter.fontColor = selectedColor
                 
+                // clear the leaderboard and then run the filter with appropriate star rating
                 clearLeaderboard()
                 filterLeaderboard(0)
             }

@@ -289,6 +289,13 @@ class GameScene2: SKScene, SKPhysicsContactDelegate {
                 let transitionToScene:SKTransition = SKTransition.crossFadeWithDuration(2.0)
                 
                 self.view?.presentScene(mainMenu!, transition: transitionToScene)
+            } else if spriteName == "nextLevel" {
+                let nextLevel = GameScene3(fileNamed: "GameScene3")
+                
+                nextLevel!.scaleMode = .Fill
+                let transitionToScene:SKTransition = SKTransition.crossFadeWithDuration(2.0)
+                
+                self.view?.presentScene(nextLevel!, transition: transitionToScene)
             }
         }
     }
@@ -427,7 +434,7 @@ class GameScene2: SKScene, SKPhysicsContactDelegate {
                     } else if enemy == "enemyThree" {
                         self.enemyTypeThree.removeActionForKey("e3KeyAnimation")
                     } else if enemy == "enemyFour" {
-                        self.enemyTypeThree.removeActionForKey("e4KeyAnimation")
+                        self.enemyTypeFour.removeActionForKey("e4KeyAnimation")
                     }
                 }
             }
@@ -511,19 +518,19 @@ class GameScene2: SKScene, SKPhysicsContactDelegate {
                         scoreTotal.text = String(calculatedTotalScore)
                         
                         // conditional statement that handles how many stars were awarded
-                        if calculatedTotalScore >= 75 {
+                        if calculatedTotalScore >= 85 {
                             starOne.alpha = 1
                             starTwo.alpha = 1
                             starThree.alpha = 1
-                        } else if calculatedTotalScore <= 74 && calculatedTotalScore >= 50 {
+                        } else if calculatedTotalScore <= 84 && calculatedTotalScore >= 60 {
                             starOne.alpha = 1
                             starTwo.alpha = 1
                             starThree.alpha = 0
-                        } else if calculatedTotalScore <= 49 && calculatedTotalScore >= 30 {
+                        } else if calculatedTotalScore <= 59 && calculatedTotalScore >= 40 {
                             starOne.alpha = 1
                             starTwo.alpha = 0
                             starThree.alpha = 0
-                        } else if calculatedTotalScore <= 29 {
+                        } else if calculatedTotalScore <= 39 {
                             starOne.alpha = 0
                             starTwo.alpha = 0
                             starThree.alpha = 0
@@ -531,41 +538,40 @@ class GameScene2: SKScene, SKPhysicsContactDelegate {
                         
                         // adding a score to the leaderboard
                         
-                        // start by logging in the user
+                        // gather all information to log in to the BaaS
                         let userName = "Sam"
-                        let pwd = "sam";
+                        let pwd = "sam"
+                        
+                        // connect to the BaaS
                         App42API.initializeWithAPIKey(self.apiKey, andSecretKey:self.secretKey)
+                        
+                        // login to the BaaS
                         let userService = App42API.buildUserService() as? UserService
                         userService?.authenticateUser(userName, password:pwd, completionBlock: { (success, response, exception) -> Void in
+                            // if the login was successful
                             if(success)
                             {
+                                // get all of the information from the log in
                                 let user = response as! User
-                                print(user.userName)
-                                print(user.email)
-                                print(user.sessionId)
-                                
-                                // this is where the score will be added
-                                
                                 let gameName = "LevelTwo"
                                 let userName = user.userName
                                 let gameScore:Double = Double(calculatedTotalScore)
+                                
+                                // connect to the BaaS
                                 App42API.initializeWithAPIKey(self.apiKey, andSecretKey: self.secretKey)
+                                
+                                // post the score to the BaaS
                                 let scoreBoardService = App42API.buildScoreBoardService() as? ScoreBoardService
                                 scoreBoardService?.saveUserScore(gameName, gameUserName:userName, gameScore:gameScore, completionBlock: { (success, response, exception) -> Void in
+                                    // if the score posted
                                     if(success)
                                     {
-                                        let game = response as! Game
-                                        let scoreList = game.scoreList
-                                        for score in scoreList
-                                        {
-                                            print(score.userName)
-                                            let scoreValue = score.value as Double
-                                            print(scoreValue)
-                                            print(score.scoreId)
-                                        }
+                                        // nothing really required
                                     }
+                                        // if there was a problem
                                     else
                                     {
+                                        // print all of the error information to the console
                                         print(exception.reason!)
                                         print(exception.appErrorCode)
                                         print(exception.httpErrorCode)
@@ -573,8 +579,10 @@ class GameScene2: SKScene, SKPhysicsContactDelegate {
                                     }
                                 })
                             }
+                                // if there was a problem with the login
                             else
                             {
+                                // print all of the error information to the console
                                 print(exception.reason!)
                                 print(exception.appErrorCode)
                                 print(exception.httpErrorCode)
