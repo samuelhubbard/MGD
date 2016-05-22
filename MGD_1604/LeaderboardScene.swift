@@ -537,17 +537,22 @@ class LeaderboardScene:SKScene {
                 globalScoreSelection.alpha = 1
                 globalScoreSelection.fontColor = selectedColor
                 localScoreSelection.alpha = 1
+                localScoreSelection.fontColor = unselectedColor
                 levelTwoLeaderboardButton.fontColor = unselectedColor
                 levelThreeLeaderboardButton.fontColor = unselectedColor
                 filterTitle.alpha = 1
                 allStarFilter.alpha = 1
-                allStarFilter.fontColor = selectedColor
                 threeStarFilter.alpha = 1
                 twoStarFilter.alpha = 1
                 oneStarFilter.alpha = 1
                 zeroStarFilter.alpha = 1
                 shareTopScoreTitle.alpha = 0
                 shareButton.alpha = 0
+                allStarFilter.fontColor = selectedColor
+                threeStarFilter.fontColor = unselectedColor
+                twoStarFilter.fontColor = unselectedColor
+                oneStarFilter.fontColor = unselectedColor
+                zeroStarFilter.fontColor = unselectedColor
                 
                 // hiding the leaderboard and clearing the array
                 self.leaderboardBox.alpha = 0
@@ -572,15 +577,20 @@ class LeaderboardScene:SKScene {
                 globalScoreSelection.alpha = 1
                 globalScoreSelection.fontColor = selectedColor
                 localScoreSelection.alpha = 1
+                localScoreSelection.fontColor = unselectedColor
                 filterTitle.alpha = 1
                 allStarFilter.alpha = 1
-                allStarFilter.fontColor = selectedColor
                 threeStarFilter.alpha = 1
                 twoStarFilter.alpha = 1
                 oneStarFilter.alpha = 1
                 zeroStarFilter.alpha = 1
                 shareTopScoreTitle.alpha = 0
                 shareButton.alpha = 0
+                allStarFilter.fontColor = selectedColor
+                threeStarFilter.fontColor = unselectedColor
+                twoStarFilter.fontColor = unselectedColor
+                oneStarFilter.fontColor = unselectedColor
+                zeroStarFilter.fontColor = unselectedColor
                 
                 // hiding the leaderboard and clearing the array
                 self.leaderboardBox.alpha = 0
@@ -606,15 +616,20 @@ class LeaderboardScene:SKScene {
                 globalScoreSelection.alpha = 1
                 globalScoreSelection.fontColor = selectedColor
                 localScoreSelection.alpha = 1
+                localScoreSelection.fontColor = unselectedColor
                 filterTitle.alpha = 1
                 allStarFilter.alpha = 1
-                allStarFilter.fontColor = selectedColor
                 threeStarFilter.alpha = 1
                 twoStarFilter.alpha = 1
                 oneStarFilter.alpha = 1
                 zeroStarFilter.alpha = 1
                 shareTopScoreTitle.alpha = 0
                 shareButton.alpha = 0
+                allStarFilter.fontColor = selectedColor
+                threeStarFilter.fontColor = unselectedColor
+                twoStarFilter.fontColor = unselectedColor
+                oneStarFilter.fontColor = unselectedColor
+                zeroStarFilter.fontColor = unselectedColor
                 
                 // hiding the leaderboard and clearing the array
                 self.leaderboardBox.alpha = 0
@@ -633,6 +648,11 @@ class LeaderboardScene:SKScene {
                 self.localScoreSelection.fontColor = unselectedColor
                 self.shareButton.alpha = 0
                 self.shareTopScoreTitle.alpha = 0
+                allStarFilter.fontColor = selectedColor
+                threeStarFilter.fontColor = unselectedColor
+                twoStarFilter.fontColor = unselectedColor
+                oneStarFilter.fontColor = unselectedColor
+                zeroStarFilter.fontColor = unselectedColor
                 
                 // clear out whatever is currently in the leaderboard
                 clearLeaderboard()
@@ -649,6 +669,11 @@ class LeaderboardScene:SKScene {
                 self.localScoreSelection.fontColor = selectedColor
                 self.shareButton.alpha = 1
                 self.shareTopScoreTitle.alpha = 1
+                allStarFilter.fontColor = selectedColor
+                threeStarFilter.fontColor = unselectedColor
+                twoStarFilter.fontColor = unselectedColor
+                oneStarFilter.fontColor = unselectedColor
+                zeroStarFilter.fontColor = unselectedColor
                 
                 // clear out whatever is currently in the leaderboard
                 clearLeaderboard()

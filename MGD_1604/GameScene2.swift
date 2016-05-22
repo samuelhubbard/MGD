@@ -568,7 +568,7 @@ class GameScene2: SKScene, SKPhysicsContactDelegate {
                                     {
                                         // nothing really required
                                     }
-                                        // if there was a problem
+                                    // if there was a problem
                                     else
                                     {
                                         // print all of the error information to the console
