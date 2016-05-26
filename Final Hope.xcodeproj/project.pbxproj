@@ -25,6 +25,8 @@
 		863B7F891CCF02DD00A2ACFB /* InstructionsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863B7F881CCF02DD00A2ACFB /* InstructionsScene.swift */; };
 		863B7F8B1CCF04CE00A2ACFB /* CreditsScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 863B7F8A1CCF04CE00A2ACFB /* CreditsScene.sks */; };
 		863B7F8D1CCF04E000A2ACFB /* CreditsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863B7F8C1CCF04E000A2ACFB /* CreditsScene.swift */; };
+		8655595A1CF5429E00A17EE8 /* Achievements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865559591CF5429E00A17EE8 /* Achievements.swift */; };
+		8655595C1CF5512E00A17EE8 /* AchievementBubbleScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8655595B1CF5512E00A17EE8 /* AchievementBubbleScene.sks */; };
 		865569551CB6182D00944709 /* alien.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 865569541CB6182D00944709 /* alien.mp3 */; };
 		865569571CB6185C00944709 /* mech.wav in Resources */ = {isa = PBXBuildFile; fileRef = 865569561CB6185C00944709 /* mech.wav */; };
 		8684CBD61CC7194D00963526 /* Explosion.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8684CBD51CC7194D00963526 /* Explosion.atlas */; };
@@ -91,6 +93,8 @@
 		863B7F881CCF02DD00A2ACFB /* InstructionsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionsScene.swift; sourceTree = "<group>"; };
 		863B7F8A1CCF04CE00A2ACFB /* CreditsScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CreditsScene.sks; sourceTree = "<group>"; };
 		863B7F8C1CCF04E000A2ACFB /* CreditsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditsScene.swift; sourceTree = "<group>"; };
+		865559591CF5429E00A17EE8 /* Achievements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Achievements.swift; sourceTree = "<group>"; };
+		8655595B1CF5512E00A17EE8 /* AchievementBubbleScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = AchievementBubbleScene.sks; sourceTree = "<group>"; };
 		865569541CB6182D00944709 /* alien.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alien.mp3; sourceTree = "<group>"; };
 		865569561CB6185C00944709 /* mech.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = mech.wav; sourceTree = "<group>"; };
 		8684CBD51CC7194D00963526 /* Explosion.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Explosion.atlas; sourceTree = "<group>"; };
@@ -177,6 +181,7 @@
 				863B7F8C1CCF04E000A2ACFB /* CreditsScene.swift */,
 				863B7F881CCF02DD00A2ACFB /* InstructionsScene.swift */,
 				86085A4D1CEEA82100B8CA5B /* Score.swift */,
+				865559591CF5429E00A17EE8 /* Achievements.swift */,
 			);
 			name = "Swift Files";
 			sourceTree = "<group>";
@@ -235,6 +240,7 @@
 				86309D8C1CBF0A8000DCDF5D /* Projectile.sks */,
 				86C08C891CE2366800314A54 /* ScoreScene.sks */,
 				86085A491CED550A00B8CA5B /* LeaderboardTemplateScene.sks */,
+				8655595B1CF5512E00A17EE8 /* AchievementBubbleScene.sks */,
 			);
 			name = "Supplemental Scenes";
 			sourceTree = "<group>";
@@ -438,6 +444,7 @@
 				865569551CB6182D00944709 /* alien.mp3 in Resources */,
 				86309D8D1CBF0A8000DCDF5D /* Projectile.sks in Resources */,
 				86085A421CED4C4A00B8CA5B /* LeaderboardScene.sks in Resources */,
+				8655595C1CF5512E00A17EE8 /* AchievementBubbleScene.sks in Resources */,
 				86A398EE1CF0A26E005C6854 /* GameScene2.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -466,6 +473,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				86C3F29E1CB4B84500167F06 /* GameScene.swift in Sources */,
+				8655595A1CF5429E00A17EE8 /* Achievements.swift in Sources */,
 				86C3F2A01CB4B84500167F06 /* GameViewController.swift in Sources */,
 				86A398FB1CF0D096005C6854 /* GameScene3.swift in Sources */,
 				86085A4E1CEEA82100B8CA5B /* Score.swift in Sources */,

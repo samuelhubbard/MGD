@@ -61,10 +61,32 @@ class GameScene2: SKScene, SKPhysicsContactDelegate {
     var wonGame:Bool = false
     let remainingRoundMultiplier:Int = 20
     let remainingTimeMultiplier:Int = 3
+    var totalStarsAwarded:Int = 0
     
-    // api and secret key needed for saving the score to the BaaS
+    // game achievement objects
+    var noStars:Achievements!
+    var scoreNinety:Achievements!
+    var twentyWins:Achievements!
+    var tenWins:Achievements!
+    var fiveWins:Achievements!
+    var firstWin:Achievements!
+    
+    // user's achievements
+    var noStarsAwarded:Bool = false
+    var scoreNinetyAwarded:Bool = false
+    var twentyWinsAwarded:Bool = false
+    var tenWinsAwarded:Bool = false
+    var fiveWinsAwarded:Bool = false
+    var firstWinAwarded:Bool = false
+    
+    // total game completion variable to handle the incremental achievement progress
+    var totalGameCompletions:Int = 0
+    
+    // BaaS access information
     let apiKey = "0f3f60f530c7a19aaea37ec9d09283c2f3908fe541aa26f946d839141432a80d"
     let secretKey = "14487c8ed6ffd81b863c957150217752b85ad0e81d7321d658d471b880fbd472"
+    let userName = "Sam"
+    let pwd = "sam"
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
@@ -522,32 +544,73 @@ class GameScene2: SKScene, SKPhysicsContactDelegate {
                             starOne.alpha = 1
                             starTwo.alpha = 1
                             starThree.alpha = 1
+                            
+                            self.totalStarsAwarded = 3
                         } else if calculatedTotalScore <= 84 && calculatedTotalScore >= 60 {
                             starOne.alpha = 1
                             starTwo.alpha = 1
                             starThree.alpha = 0
+                            
+                            self.totalStarsAwarded = 2
                         } else if calculatedTotalScore <= 59 && calculatedTotalScore >= 40 {
                             starOne.alpha = 1
                             starTwo.alpha = 0
                             starThree.alpha = 0
+                            
+                            self.totalStarsAwarded = 1
                         } else if calculatedTotalScore <= 39 {
                             starOne.alpha = 0
                             starTwo.alpha = 0
                             starThree.alpha = 0
+                            
+                            self.totalStarsAwarded = 0
                         }
                         
-                        // adding a score to the leaderboard
+                        // defining the achievement objects
+                        self.noStars = Achievements(_user: self.userName, _achievement: "No Star Win", _description: "You won... barely.", _game: "LevelOne")
+                        self.scoreNinety = Achievements(_user: self.userName, _achievement: "Mad Skillz", _description: "Completed a level with a score greater than 90.", _game: "LevelOne")
+                        self.twentyWins = Achievements(_user: self.userName, _achievement: "Dedicated", _description: "Completed 20 total levels.", _game: "LevelOne")
+                        self.tenWins = Achievements(_user: self.userName, _achievement: "Definitely Interested", _description: "Completed 10 levels.", _game: "LevelOne")
+                        self.fiveWins = Achievements(_user: self.userName, _achievement: "A Good Start", _description: "Completed 5 total levels.", _game: "LevelOne")
+                        self.firstWin = Achievements(_user: self.userName, _achievement: "Everything Starts Somewhere", _description: "Won your first level with a star rating of 2 or higher.", _game: "LevelOne")
                         
-                        // gather all information to log in to the BaaS
-                        let userName = "Sam"
-                        let pwd = "sam"
+                        // no star win
+                        var noStarWinEligible:Bool!
+                        
+                        if calculatedTotalScore <= 39 {
+                            noStarWinEligible = true
+                        } else {
+                            noStarWinEligible = false
+                        }
+                        
+                        // score above 90
+                        var topScoreEligble:Bool!
+                        
+                        if calculatedTotalScore >= 90 {
+                            topScoreEligble = true
+                        } else {
+                            topScoreEligble = false
+                        }
+                        
+                        // first level completed
+                        var firstLevelComplete:Bool!
+                        
+                        if self.totalStarsAwarded >= 2 {
+                            firstLevelComplete = true
+                        } else {
+                            firstLevelComplete = false
+                        }
+                        
+                        // the array to hold all of the achievements earned this round
+                        var newAchievements:[Achievements] = []
+                        
                         
                         // connect to the BaaS
                         App42API.initializeWithAPIKey(self.apiKey, andSecretKey:self.secretKey)
                         
                         // login to the BaaS
                         let userService = App42API.buildUserService() as? UserService
-                        userService?.authenticateUser(userName, password:pwd, completionBlock: { (success, response, exception) -> Void in
+                        userService?.authenticateUser(self.userName, password:self.pwd, completionBlock: { (success, response, exception) -> Void in
                             // if the login was successful
                             if(success)
                             {
@@ -568,7 +631,7 @@ class GameScene2: SKScene, SKPhysicsContactDelegate {
                                     {
                                         // nothing really required
                                     }
-                                    // if there was a problem
+                                        // if there was a problem
                                     else
                                     {
                                         // print all of the error information to the console
@@ -576,6 +639,155 @@ class GameScene2: SKScene, SKPhysicsContactDelegate {
                                         print(exception.appErrorCode)
                                         print(exception.httpErrorCode)
                                         print(exception.userInfo!)
+                                    }
+                                })
+                                // update the hidden leaderboard
+                                let hiddenBoard = "CumulativeAchievementTracker"
+                                App42API.initializeWithAPIKey(self.apiKey, andSecretKey: self.secretKey)
+                                let hiddenBoardService = App42API.buildScoreBoardService() as? ScoreBoardService
+                                hiddenBoardService?.getScoresByUser(hiddenBoard, gameUserName:self.userName, completionBlock: { (success, response, exception) -> Void in
+                                    if(success)
+                                    {
+                                        // getting the user's current game completions
+                                        let game = response as! Game
+                                        let scoreList = game.scoreList
+                                        var scoreValue:Double!
+                                        for score in scoreList
+                                        {
+                                            scoreValue = score.value as Double
+                                        }
+                                        
+                                        // update the score id with score + 1
+                                        // and set current game completions
+                                        let scoreId = scoreList[0].scoreId
+                                        let currentCompletions:Int = Int(scoreValue)
+                                        self.totalGameCompletions = currentCompletions + 1
+                                        let score:Double = Double(self.totalGameCompletions)
+                                        App42API.initializeWithAPIKey(self.apiKey, andSecretKey: self.secretKey)
+                                        let scoreBoardService = App42API.buildScoreBoardService() as? ScoreBoardService
+                                        scoreBoardService?.editScoreValueById(scoreId, gameScore:score, completionBlock: { (success, response, exception) -> Void in
+                                            if(success)
+                                            {
+                                                // nothing required
+                                            }
+                                            else
+                                            {
+                                                // print any errors to the console
+                                                print(exception.reason!)
+                                                print(exception.appErrorCode)
+                                                print(exception.httpErrorCode)
+                                                print(exception.userInfo!)
+                                            }
+                                        })
+                                    }
+                                    else
+                                    {
+                                        // if this is the first level completed
+                                        if exception.appErrorCode == 3010 {
+                                            // post a new score
+                                            // and set current game completions to 1
+                                            let gameScore:Double = 1
+                                            App42API.initializeWithAPIKey(self.apiKey, andSecretKey: self.secretKey)
+                                            let scoreBoardService = App42API.buildScoreBoardService() as? ScoreBoardService
+                                            scoreBoardService?.saveUserScore(hiddenBoard, gameUserName:self.userName, gameScore:gameScore, completionBlock: { (success, response, exception) -> Void in
+                                                if(success)
+                                                {
+                                                    // set the internal value for achievement checking
+                                                    self.totalGameCompletions = Int(gameScore)
+                                                }
+                                                else
+                                                {
+                                                    // print any errors to the console
+                                                    print(exception.reason!)
+                                                    print(exception.appErrorCode)
+                                                    print(exception.httpErrorCode)
+                                                    print(exception.userInfo!)
+                                                }
+                                            })
+                                        }
+                                    }
+                                })
+                                
+                                // pulling in all (if any) already earned achievements
+                                App42API.initializeWithAPIKey(self.apiKey, andSecretKey: self.secretKey)
+                                let achievementService = App42API.buildAchievementService() as? AchievementService
+                                achievementService?.getAllAchievementsForUser(self.userName, completionBlock:{ (success, response, exception) -> Void in
+                                    if(success)
+                                    {
+                                        let achievements = response as! [Achievement]
+                                        for achievement in achievements{
+                                            // checking to see what achievements have already been awarded
+                                            // if they have, remove the chance
+                                            switch achievement.name {
+                                            case self.noStars.achievementName:
+                                                self.noStarsAwarded = true
+                                                break
+                                            case self.scoreNinety.achievementName:
+                                                self.scoreNinetyAwarded = true
+                                                break
+                                            case self.twentyWins.achievementName:
+                                                self.twentyWinsAwarded = true
+                                                break
+                                            case self.tenWins.achievementName:
+                                                self.tenWinsAwarded = true
+                                                break
+                                            case self.fiveWins.achievementName:
+                                                self.fiveWinsAwarded = true
+                                                break
+                                            case self.firstWin.achievementName:
+                                                self.firstWinAwarded = true
+                                                break
+                                            default:
+                                                break
+                                            }
+                                        }
+                                        
+                                        // logic to determine achievements to be awarded
+                                        if !self.noStarsAwarded && noStarWinEligible {
+                                            newAchievements.append(self.noStars)
+                                        }
+                                        
+                                        if !self.scoreNinetyAwarded && topScoreEligble {
+                                            newAchievements.append(self.scoreNinety)
+                                        }
+                                        
+                                        if !self.firstWinAwarded && firstLevelComplete {
+                                            newAchievements.append(self.firstWin)
+                                        }
+                                        
+                                        let achievementWait:SKAction = SKAction.waitForDuration(1.5)
+                                        
+                                        let achievementCall:SKAction = SKAction.runBlock({
+                                            self.awardAchievements(newAchievements)
+                                        })
+                                        
+                                        self.runAction(SKAction.sequence([achievementWait, achievementCall]))
+                                        
+                                    }
+                                    else
+                                    {
+                                        // app error code 4803 is no achievements for that user
+                                        if exception.appErrorCode == 4803 {
+                                            if firstLevelComplete == true {
+                                                newAchievements.append(self.firstWin)
+                                            }
+                                            
+                                            if topScoreEligble == true {
+                                                newAchievements.append(self.scoreNinety)
+                                            }
+                                            
+                                            if noStarWinEligible == true {
+                                                newAchievements.append(self.noStars)
+                                            }
+                                            
+                                            let achievementWait:SKAction = SKAction.waitForDuration(1.5)
+                                            
+                                            let achievementCall:SKAction = SKAction.runBlock({
+                                                self.awardAchievements(newAchievements)
+                                            })
+                                            
+                                            self.runAction(SKAction.sequence([achievementWait, achievementCall]))
+                                        }
                                     }
                                 })
                             }
@@ -610,8 +822,6 @@ class GameScene2: SKScene, SKPhysicsContactDelegate {
                     
                 })
                 self.runAction(SKAction.sequence([soundWaiting, playSound, endWaiting, moveToScoreBox]))
-                
-                
             })
             
             // run the action sequence for the end of game conditions text
@@ -619,5 +829,104 @@ class GameScene2: SKScene, SKPhysicsContactDelegate {
         }
         // run the action sequence for the explosion
         self.runAction(SKAction.sequence([wait, startExplosion]))
+    }
+    
+    func awardAchievements(_array:[Achievements]) {
+        
+        var array:[Achievements] = _array
+        
+        if self.totalGameCompletions == 5 && !self.fiveWinsAwarded {
+            array.append(self.fiveWins)
+        }
+        
+        if self.totalGameCompletions == 10 && !self.tenWinsAwarded && self.fiveWinsAwarded{
+            array.append(self.tenWins)
+        }
+        
+        if self.totalGameCompletions == 20 && !self.twentyWinsAwarded && self.tenWinsAwarded && self.fiveWinsAwarded {
+            array.append(self.twentyWins)
+        }
+        
+        
+        // the array that will hold the sequence for showing earned achievements from the level
+        var sequenceArray:[SKAction] = []
+        
+        // bring the bubble in
+        let achievementBubble:SKSpriteNode = SKScene(fileNamed: "AchievementBubbleScene")!.childNodeWithName("achievementBubble")! as! SKSpriteNode
+        
+        // set the alpha to zero until it's ready
+        achievementBubble.alpha = 0
+        
+        // remove the bubble from its current parent and add it to this scene
+        achievementBubble.removeFromParent()
+        self.addChild(achievementBubble)
+        
+        // set the bubble's position and z on screen
+        achievementBubble.position = CGPointMake(300, 800)
+        achievementBubble.zPosition = 5
+        
+        let achievementMessage:SKLabelNode = achievementBubble.childNodeWithName("achievementName") as! SKLabelNode
+        
+        // run BaaS achievement award code
+        
+        
+        // in success of BaaS achievement award code - SKAction sequence holding code blocks and waits to show achievement bubble
+        if array.count > 0 {
+            for achievement in array {
+                let achievementName = achievement.achievementName
+                let userName = achievement.userName
+                let gameName = achievement.gameName
+                let description = achievement.achievementDescription
+                App42API.initializeWithAPIKey(self.apiKey, andSecretKey:self.secretKey)
+                let achievementService = App42API.buildAchievementService() as? AchievementService
+                achievementService?.earnAchievementWithName(achievementName, userName: userName, gameName: gameName, description: description, completionBlock:{ (success, response, exception) -> Void in
+                    
+                    if(success)
+                    {
+                        // nothing really required
+                    }
+                    else
+                    {
+                        print(exception.reason!)
+                        print(exception.appErrorCode)
+                        print(exception.httpErrorCode)
+                        print(exception.userInfo!)
+                    }
+                })
+            }
+            
+            // the loop that puts together the sequence to properly display the earned achievements
+            for showAchievement in array {
+                
+                // the fade in code block that also sets the text to the earned achievement
+                let fadeAchievementIn:SKAction = SKAction.runBlock({
+                    // fade in the achievement
+                    achievementMessage.text = showAchievement.achievementName
+                    achievementBubble.runAction(SKAction.fadeInWithDuration(0.5))
+                    
+                })
+                
+                // add the fade in to the sequence
+                sequenceArray.append(fadeAchievementIn)
+                
+                // define and add the wait action for how long to display the earned achievement to the sequence
+                let showAchievementTimer:SKAction = SKAction.waitForDuration(3)
+                sequenceArray.append(showAchievementTimer)
+                
+                // define and add the fade out action to the sequence
+                let fadeAchievementOut:SKAction = SKAction.runBlock({
+                    // fade out the achievement
+                    achievementBubble.runAction(SKAction.fadeOutWithDuration(0.5))
+                })
+                sequenceArray.append(fadeAchievementOut)
+                
+                // define and add the wait between showing achievements to the sequence
+                let waitForNextAchievement:SKAction = SKAction.waitForDuration(1)
+                sequenceArray.append(waitForNextAchievement)
+            }
+            
+            // run the sequence using the sequence array
+            self.runAction(SKAction.sequence(sequenceArray))
+        }
     }
 }
