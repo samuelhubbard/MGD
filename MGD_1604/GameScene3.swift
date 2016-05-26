@@ -562,11 +562,11 @@ class GameScene3: SKScene, SKPhysicsContactDelegate {
                         
                         // defining the achievement objects
                         self.noStars = Achievements(_user: self.userName, _achievement: "No Star Win", _description: "You won... barely.", _game: "LevelOne")
-                        self.scoreNinety = Achievements(_user: self.userName, _achievement: "Mad Skillz", _description: "Completed a level with a score greater than 90.", _game: "LevelOne")
+                        self.scoreNinety = Achievements(_user: self.userName, _achievement: "Mad Skillz", _description: "Score above 90.", _game: "LevelOne")
                         self.twentyWins = Achievements(_user: self.userName, _achievement: "Dedicated", _description: "Completed 20 total levels.", _game: "LevelOne")
                         self.tenWins = Achievements(_user: self.userName, _achievement: "Definitely Interested", _description: "Completed 10 levels.", _game: "LevelOne")
                         self.fiveWins = Achievements(_user: self.userName, _achievement: "A Good Start", _description: "Completed 5 total levels.", _game: "LevelOne")
-                        self.firstWin = Achievements(_user: self.userName, _achievement: "Everything Starts Somewhere", _description: "Won your first level with a star rating of 2 or higher.", _game: "LevelOne")
+                        self.firstWin = Achievements(_user: self.userName, _achievement: "Newbie", _description: "Finished a level with 2 stars.", _game: "LevelOne")
                         
                         // no star win
                         var noStarWinEligible:Bool!
@@ -610,7 +610,7 @@ class GameScene3: SKScene, SKPhysicsContactDelegate {
                             {
                                 // get all of the information from the log in
                                 let user = response as! User
-                                let gameName = "LevelOne"
+                                let gameName = "LevelThree"
                                 let userName = user.userName
                                 let gameScore:Double = Double(calculatedTotalScore)
                                 
@@ -749,8 +749,9 @@ class GameScene3: SKScene, SKPhysicsContactDelegate {
                                             newAchievements.append(self.firstWin)
                                         }
                                         
+                                        // SKActions to provide a delay to allow background tasks to complete
+                                        // prior to pushing achievement function
                                         let achievementWait:SKAction = SKAction.waitForDuration(1.5)
-                                        
                                         let achievementCall:SKAction = SKAction.runBlock({ 
                                             self.awardAchievements(newAchievements)
                                         })
@@ -827,8 +828,10 @@ class GameScene3: SKScene, SKPhysicsContactDelegate {
     
     func awardAchievements(_array:[Achievements]) {
         
+        // pulling in the array
         var array:[Achievements] = _array
         
+        // conditionals to determine if the incremental achievement should be awarded
         if self.totalGameCompletions == 5 && !self.fiveWinsAwarded {
             array.append(self.fiveWins)
         }
@@ -859,12 +862,10 @@ class GameScene3: SKScene, SKPhysicsContactDelegate {
         achievementBubble.position = CGPointMake(300, 800)
         achievementBubble.zPosition = 5
         
+        // link the label node to place the achievement name in
         let achievementMessage:SKLabelNode = achievementBubble.childNodeWithName("achievementName") as! SKLabelNode
         
-        // run BaaS achievement award code
-        
-        
-        // in success of BaaS achievement award code - SKAction sequence holding code blocks and waits to show achievement bubble
+        // ensure that there are contents to the array
         if array.count > 0 {
             for achievement in array {
                 let achievementName = achievement.achievementName

@@ -27,6 +27,9 @@
 		863B7F8D1CCF04E000A2ACFB /* CreditsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863B7F8C1CCF04E000A2ACFB /* CreditsScene.swift */; };
 		8655595A1CF5429E00A17EE8 /* Achievements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865559591CF5429E00A17EE8 /* Achievements.swift */; };
 		8655595C1CF5512E00A17EE8 /* AchievementBubbleScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8655595B1CF5512E00A17EE8 /* AchievementBubbleScene.sks */; };
+		8655595E1CF730D000A17EE8 /* AchievementsScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8655595D1CF730D000A17EE8 /* AchievementsScene.sks */; };
+		865559601CF7352B00A17EE8 /* AchievementsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8655595F1CF7352B00A17EE8 /* AchievementsScene.swift */; };
+		865559641CF73E2500A17EE8 /* AchievementsCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865559631CF73E2500A17EE8 /* AchievementsCollection.swift */; };
 		865569551CB6182D00944709 /* alien.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 865569541CB6182D00944709 /* alien.mp3 */; };
 		865569571CB6185C00944709 /* mech.wav in Resources */ = {isa = PBXBuildFile; fileRef = 865569561CB6185C00944709 /* mech.wav */; };
 		8684CBD61CC7194D00963526 /* Explosion.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8684CBD51CC7194D00963526 /* Explosion.atlas */; };
@@ -95,6 +98,9 @@
 		863B7F8C1CCF04E000A2ACFB /* CreditsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditsScene.swift; sourceTree = "<group>"; };
 		865559591CF5429E00A17EE8 /* Achievements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Achievements.swift; sourceTree = "<group>"; };
 		8655595B1CF5512E00A17EE8 /* AchievementBubbleScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = AchievementBubbleScene.sks; sourceTree = "<group>"; };
+		8655595D1CF730D000A17EE8 /* AchievementsScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = AchievementsScene.sks; sourceTree = "<group>"; };
+		8655595F1CF7352B00A17EE8 /* AchievementsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsScene.swift; sourceTree = "<group>"; };
+		865559631CF73E2500A17EE8 /* AchievementsCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsCollection.swift; sourceTree = "<group>"; };
 		865569541CB6182D00944709 /* alien.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alien.mp3; sourceTree = "<group>"; };
 		865569561CB6185C00944709 /* mech.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = mech.wav; sourceTree = "<group>"; };
 		8684CBD51CC7194D00963526 /* Explosion.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Explosion.atlas; sourceTree = "<group>"; };
@@ -170,18 +176,16 @@
 		86085A3F1CED4AE700B8CA5B /* Swift Files */ = {
 			isa = PBXGroup;
 			children = (
+				865559621CF7373300A17EE8 /* Levels */,
+				865559611CF735BD00A17EE8 /* Objects */,
 				86C3F2991CB4B84500167F06 /* AppDelegate.swift */,
 				86C3F29F1CB4B84500167F06 /* GameViewController.swift */,
 				863B7F841CCEF57000A2ACFB /* MainMenuScene.swift */,
 				86A398F51CF0A832005C6854 /* LevelSelection.swift */,
-				86C3F29D1CB4B84500167F06 /* GameScene.swift */,
-				86A398EF1CF0A314005C6854 /* GameScene2.swift */,
-				86A398FA1CF0D096005C6854 /* GameScene3.swift */,
 				86085A451CED4F1700B8CA5B /* LeaderboardScene.swift */,
+				8655595F1CF7352B00A17EE8 /* AchievementsScene.swift */,
 				863B7F8C1CCF04E000A2ACFB /* CreditsScene.swift */,
 				863B7F881CCF02DD00A2ACFB /* InstructionsScene.swift */,
-				86085A4D1CEEA82100B8CA5B /* Score.swift */,
-				865559591CF5429E00A17EE8 /* Achievements.swift */,
 			);
 			name = "Swift Files";
 			sourceTree = "<group>";
@@ -197,9 +201,30 @@
 				863B7F861CCF02B400A2ACFB /* InstructionsScene.sks */,
 				863B7F8A1CCF04CE00A2ACFB /* CreditsScene.sks */,
 				86085A411CED4C4A00B8CA5B /* LeaderboardScene.sks */,
+				8655595D1CF730D000A17EE8 /* AchievementsScene.sks */,
 				86A398F71CF0BB16005C6854 /* Supplemental Scenes */,
 			);
 			name = Scenes;
+			sourceTree = "<group>";
+		};
+		865559611CF735BD00A17EE8 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				86085A4D1CEEA82100B8CA5B /* Score.swift */,
+				865559591CF5429E00A17EE8 /* Achievements.swift */,
+				865559631CF73E2500A17EE8 /* AchievementsCollection.swift */,
+			);
+			name = Objects;
+			sourceTree = "<group>";
+		};
+		865559621CF7373300A17EE8 /* Levels */ = {
+			isa = PBXGroup;
+			children = (
+				86C3F29D1CB4B84500167F06 /* GameScene.swift */,
+				86A398EF1CF0A314005C6854 /* GameScene2.swift */,
+				86A398FA1CF0D096005C6854 /* GameScene3.swift */,
+			);
+			name = Levels;
 			sourceTree = "<group>";
 		};
 		865569581CB6186700944709 /* Sounds */ = {
@@ -433,6 +458,7 @@
 				86F2D6291CBF4F6900C875EB /* ProjectileExplosion.sks in Resources */,
 				86048F001CC80FCE00D5E7D5 /* EndGame.wav in Resources */,
 				86C3F2A81CB4B84500167F06 /* LaunchScreen.storyboard in Resources */,
+				8655595E1CF730D000A17EE8 /* AchievementsScene.sks in Resources */,
 				86048F021CC8115900D5E7D5 /* EndConditions.mp3 in Resources */,
 				86C3F2A51CB4B84500167F06 /* Assets.xcassets in Resources */,
 				86C08C8A1CE2366800314A54 /* ScoreScene.sks in Resources */,
@@ -473,8 +499,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				86C3F29E1CB4B84500167F06 /* GameScene.swift in Sources */,
+				865559641CF73E2500A17EE8 /* AchievementsCollection.swift in Sources */,
 				8655595A1CF5429E00A17EE8 /* Achievements.swift in Sources */,
 				86C3F2A01CB4B84500167F06 /* GameViewController.swift in Sources */,
+				865559601CF7352B00A17EE8 /* AchievementsScene.swift in Sources */,
 				86A398FB1CF0D096005C6854 /* GameScene3.swift in Sources */,
 				86085A4E1CEEA82100B8CA5B /* Score.swift in Sources */,
 				86A398F01CF0A314005C6854 /* GameScene2.swift in Sources */,
